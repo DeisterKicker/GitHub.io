@@ -7,144 +7,112 @@
 
 <style>
 :root{
-  --blue:#0F0147;
-  --blue-dark:#09002c;
-  --orange:#F87903;
+  --blue:#0F0147;        /* Hauptfarbe */
+  --blue-dark:#09002c;   /* dunkler Ton */
+  --orange:#F87903;      /* Akzent */
   --white:#ffffff;
 }
 
-/* Body Basis */
-html,body{
-  margin:0;
-  padding:0;
+/* Reset & Base */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
   font-family:Arial, Helvetica, sans-serif;
-  background:var(--white);
   color:var(--white);
+  background:var(--blue-dark);
 }
 
-/* HERO SECTION */
+/* === HERO =========================================================== */
 .hero{
   position:relative;
-  height:100vh;
-  width:100%;
-  background:url("Fussball Kids Banner.jpg") center/cover no-repeat;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
+  height:100vh; width:100%;
+  display:flex; align-items:center; justify-content:center; text-align:center;
   overflow:hidden;
 }
-
-/* Farbverlauf Overlay */
+/* Hintergrundfoto */
 .hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom, rgba(15,1,71,0.85), rgba(15,1,71,0.35));
+  content:""; position:absolute; inset:0;
+  background:url("Fussball Kids Banner.jpg") center/cover no-repeat;
+  transform:scale(1.02);
+  filter:brightness(.95);
+}
+/* Dynamisches Blau-Overlay + Vignette */
+.hero::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(1000px 480px at 50% -10%, rgba(15,1,71,.42), transparent 60%),
+    linear-gradient(180deg, rgba(15,1,71,.78) 0%, rgba(15,1,71,.62) 45%, rgba(9,0,44,.88) 100%),
+    linear-gradient(0deg, rgba(0,0,0,.08), rgba(0,0,0,.08));
 }
 
-/* Logo oben rechts */
-.logo{
-  position:absolute;
-  top:25px;
-  right:35px;
-  height:80px;
-  width:auto;
-  z-index:10;
+/* === LOGO oben rechts (fixed & ganz vorne) ========================= */
+.site-logo{
+  position:fixed; top:22px; right:26px;
+  height:82px; width:auto; z-index:1000;
+  filter:drop-shadow(0 8px 22px rgba(0,0,0,.35));
 }
 
-/* Text im Hero */
+/* === Inhalt im Hero =============================================== */
 .hero-content{
-  position:relative;
-  z-index:5;
-  max-width:800px;
-  padding:20px;
+  position:relative; z-index:5; padding:0 20px; max-width:900px;
+  text-shadow:0 6px 22px rgba(0,0,0,.55);
 }
-
 .hero h1{
-  font-size:3rem;
-  font-weight:900;
-  margin-bottom:12px;
+  margin:0 0 10px;
+  font-size:clamp(2.2rem, 5vw, 3.4rem);
+  font-weight:900; letter-spacing:.5px;
 }
-
 .hero p{
-  font-size:1.25rem;
-  line-height:1.45;
-  margin-bottom:30px;
+  margin:0 auto 28px; max-width:800px;
+  font-size:clamp(1.05rem, 2.2vw, 1.25rem);
+  line-height:1.55; opacity:.98;
 }
 
 /* Buttons */
-.btn-row{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
+.btn-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:14px 22px; border-radius:10px; text-decoration:none;
+  font-weight:800; font-size:1.02rem; transition:.18s; border:2px solid transparent;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
 }
-
-.btn-orange{
-  background:var(--orange);
-  color:var(--white);
-  padding:14px 24px;
-  border-radius:6px;
-  font-weight:700;
-  border:none;
-  cursor:pointer;
-  text-decoration:none;
-  transition:0.25s;
-}
-
-.btn-orange:hover{
-  background:#d86803;
-}
-
-.btn-outline{
-  border:2px solid var(--white);
-  padding:12px 22px;
-  border-radius:6px;
-  font-weight:700;
-  text-decoration:none;
-  color:var(--white);
-  transition:0.25s;
-}
-
-.btn-outline:hover{
-  background:var(--white);
-  color:var(--blue-dark);
-}
+.btn-orange{background:var(--orange); color:#111}
+.btn-orange:hover{filter:brightness(.95); transform:translateY(-1px)}
+.btn-outline{background:transparent; color:#fff; border-color:#fff}
+.btn-outline:hover{background:rgba(255,255,255,.10); transform:translateY(-1px)}
 
 /* Footer */
-footer{
-  text-align:center;
-  font-size:0.9rem;
-  padding:25px;
-  color:var(--blue);
+footer{color:rgba(255,255,255,.78); text-align:center; padding:26px 12px; font-size:.9rem}
+@media (max-width:560px){
+  .site-logo{height:68px; top:18px; right:18px}
 }
 </style>
 </head>
-
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <img src="logo-dkf.png" alt="Logo" class="logo">
+<!-- Logo oben rechts (Cache-Buster ?v=2, damit der Browser die neue PNG lädt) -->
+<img src="logo-dkf.png?v=2" alt="Deister Kicker Logo" class="site-logo" />
 
+<section class="hero">
   <div class="hero-content">
     <h1>Deister Kicker Fussballschule</h1>
     <p>
-      Moderne, spielnahe Einheiten für motivierte Spielerinnen & Spieler ab 5 Jahren.<br>
-      Fokus: Spaß am Ball • klare Methodik • individuelle Entwicklung.
+      Moderne, spielnahe Einheiten für motivierte Spielerinnen &amp; Spieler ab 5 Jahren.<br>
+      Fokus: <strong>Spaß am Ball</strong> • <strong>klare Methodik</strong> • <strong>individuelle Entwicklung</strong>.
     </p>
 
     <div class="btn-row">
-      <a class="btn-orange" href="https://wa.me/4917661779069" target="_blank">WhatsApp – Probetraining anfragen</a>
-      <a class="btn-outline" href="mailto:info@players-factory.de">E-Mail senden</a>
+      <a class="btn btn-orange" href="https://wa.me/4917661779069" target="_blank" rel="noopener">
+        WhatsApp – Probetraining anfragen
+      </a>
+      <a class="btn btn-outline" href="mailto:info@deister-kicker.de">
+        E-Mail senden
+      </a>
     </div>
   </div>
 </section>
 
-<footer>
-  © Deister Kicker Fussballschule · 2025
-</footer>
+<footer>© Deister Kicker Fussballschule · 2025</footer>
 
 </body>
 </html>
