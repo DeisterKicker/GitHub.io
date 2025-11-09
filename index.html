@@ -3,336 +3,419 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DEISTER-KICKER-FUSSBALLSCHULE</title>
-
+  <title>DEISTER KICKER FUSSBALLSCHULE</title>
   <style>
     :root{
       --blue:#0F0147;
-      --blue-900:#09002E;
+      --blue-dark:#09012f;
+      --blue-mid:#12025a;
       --orange:#F87903;
-      --white:#FFFFFF;
+      --white:#ffffff;
+      --card:#0d0c1a;
+      --muted: #cfd3ff;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --radius: 14px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;height:100%;font-family:Arial, Helvetica, sans-serif;background:#0a0a14;color:var(--white)}
-    a{color:inherit;text-decoration:none}
+    html,body{margin:0}
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--white);
+      background: radial-gradient(1200px 600px at 50% -200px, #2a1c85 0%, var(--blue) 35%, var(--blue-dark) 100%);
+      line-height:1.5;
+    }
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%;height:auto}
 
-    /* ---------- HERO ---------- */
+    /* ===== TOP RIGHT LOGO (bigger, no border) ===== */
+    .topbar{
+      position:absolute; inset:24px 24px auto auto;
+      z-index:6;
+    }
+    .topbar img{
+      height:86px; /* größer */
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
+    }
+
+    /* ===== HERO ===== */
     .hero{
-      position:relative; min-height:86vh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden;
+      position:relative;
+      min-height: 88svh;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      overflow:hidden;
+      border-bottom: 10px solid rgba(255,255,255,.06);
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
       background:
-        radial-gradient(1200px 70% at 50% -10%, rgba(255,255,255,0.05), rgba(0,0,0,0) 60%) no-repeat,
-        linear-gradient(180deg, rgba(9,0,46,0.96) 0%, rgba(15,1,71,0.85) 35%, rgba(15,1,71,0.55) 58%, rgba(0,0,0,0.15) 88%) no-repeat,
+        linear-gradient(180deg, rgba(13,12,26,.65) 0%, rgba(18,2,90,.55) 30%, rgba(18,2,90,.25) 55%, rgba(18,2,90,.0) 72%),
         url("Fussball Kids Banner.jpg") center/cover no-repeat;
+      transform: translateZ(0);
+      will-change: transform;
+      filter: saturate(1.05);
     }
-    .brand-logo{
-      position:absolute; top:24px; right:24px; width:136px; height:auto;
-      filter:drop-shadow(0 8px 20px rgba(0,0,0,0.35));
-      user-select:none; -webkit-user-drag:none;
-    }
-    .pill{
-      display:inline-block; padding:7px 14px; border-radius:999px;
-      background:rgba(255,255,255,0.12); backdrop-filter: blur(4px);
-      font-weight:700; letter-spacing:.4px; font-size:.9rem; color:#E6E6EF;
-    }
-    .hero h1{
-      margin:.9rem 0 0; font-size: clamp(1.8rem, 4.6vw, 4rem);
-      line-height:1.02; font-weight:900; text-transform:uppercase; letter-spacing:.06em;
-      color:var(--orange); text-shadow:0 8px 24px rgba(0,0,0,.45);
-    }
-    .hero p.lead{
-      margin:14px auto 18px; max-width:980px; font-size:clamp(.98rem, 1.9vw, 1.15rem);
-      color:#f0f0f5; text-shadow:0 6px 18px rgba(0,0,0,.45);
-    }
-    .cta{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
-    .btn{
-      appearance:none; border:0; cursor:pointer; padding:12px 18px; border-radius:10px;
-      font-weight:800; letter-spacing:.3px; transition:.18s transform ease, .2s box-shadow ease, .2s background ease, .2s color ease, .2s opacity ease;
+    .hero .inner{position:relative; z-index:2; margin-top:4svh}
+    .eyebrow{
       display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,.12);
+      color:#eaeaff;
+      font-size:14px;
+      letter-spacing:.3px;
+      margin-bottom:18px;
+      backdrop-filter: blur(4px);
     }
-    .btn:active{ transform:translateY(1px) }
-    .btn-primary{ background:var(--orange); color:var(--blue) }
-    .btn-primary:hover{ box-shadow:0 10px 24px rgba(248,121,3,.28) }
-    .btn-ghost{ background:#ffffff; color:var(--blue); opacity:.92 }
-    .btn-ghost:hover{ opacity:1; box-shadow:0 10px 24px rgba(255,255,255,.22) }
-
-    /* ---------- Sections ---------- */
-    .section{
-      padding:64px 20px;
-      background:
-        radial-gradient(900px 300px at 50% -40px, rgba(255,255,255,.06), rgba(255,255,255,0)) no-repeat,
-        linear-gradient(180deg, #0b0d28 0%, #0a0d25 100%);
+    .title{
+      margin:0 18px 10px;
+      font-size: clamp(28px, 5.3vw, 56px);
+      font-weight: 900;
+      letter-spacing:.5px;
+      text-transform: uppercase; /* nur Großbuchstaben */
+      color: var(--orange);
+      text-shadow: 0 6px 22px rgba(0,0,0,.55);
     }
-    .wrap{ max-width:1100px; margin:0 auto }
-    h2{ margin:0 0 26px; font-size: clamp(1.4rem,3vw,2.1rem); letter-spacing:.04em; text-transform:uppercase }
+    .subtitle{
+      max-width: 980px;
+      margin:0 auto 22px;
+      color: #f2f3ff;
+      opacity:.92;
+      text-shadow: 0 4px 14px rgba(0,0,0,.6);
+    }
+    .cta-row{
+      display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      height:42px; padding:0 18px; border-radius:10px; border:0; cursor:pointer;
+      font-weight:700; letter-spacing:.2px;
+      box-shadow: var(--shadow);
+      transition:.2s transform ease, .2s filter ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05);}
+    .btn-orange{ background: var(--orange); color: var(--blue); }
+    .btn-ghost{ background: #eef0ff; color: var(--blue); }
+    .btn-ghost:hover{ filter: brightness(0.96); }
 
-    /* ---------- Warum wir ---------- */
-    .grid-why{ display:grid; gap:18px; grid-template-columns:repeat(3,1fr) }
+    /* Floating scroll-up button */
+    .scrollup{
+      position:fixed; right:18px; bottom:18px; z-index:9;
+      width:44px; height:44px; border-radius:999px; display:grid; place-items:center;
+      background: var(--orange); color: var(--blue); font-weight:900; box-shadow: var(--shadow);
+    }
+
+    /* ===== SECTION WRAPPER ===== */
+    .wrap{max-width:1150px; margin:0 auto; padding:56px 20px}
+
+    .section-title{
+      font-size: clamp(22px, 3.6vw, 36px);
+      margin: 6px 0 18px;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+
+    /* ===== WHY US (bigger icons) ===== */
+    .why{
+      display:grid; gap:18px;
+      grid-template-columns: repeat(3, 1fr);
+    }
     .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border-radius:16px; padding:20px;
-      box-shadow: 0 18px 40px rgba(0,0,0,.28) inset, 0 6px 18px rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.06);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding:20px;
+      box-shadow: var(--shadow);
     }
-    .icon{
-      width:38px; height:38px; border-radius:10px; display:grid; place-items:center;
-      background:rgba(248,121,3,.18); color:var(--orange); font-weight:900;
-      margin-bottom:10px; font-size:20px;
+    .why .item{
+      display:grid; grid-template-columns:56px 1fr; gap:14px; align-items:flex-start;
+      padding:22px 22px;
     }
-    .card h3{ margin:0 0 6px; font-size:1.15rem }
-    .card p{ margin:0; color:#D7DAE8; font-size:.95rem }
+    .why .icon{
+      width:56px; height:56px; border-radius:12px;
+      background: radial-gradient(110% 110% at 30% 20%, #ffb36e 0%, var(--orange) 55%, #d45600 100%);
+      display:grid; place-items:center; font-size:26px; color:#fff;
+      box-shadow: inset 0 0 18px rgba(0,0,0,.15), 0 8px 18px rgba(0,0,0,.35);
+    }
+    .why h3{margin:0 0 6px; font-size:18px}
 
-    /* ---------- HIGHLIGHTS (ehem. Performance) ---------- */
-    .perf-title{margin-bottom:10px}
-    .perf-sub{margin:-12px 0 22px; opacity:.85}
-    .perf-grid{ display:grid; gap:18px; grid-template-columns:repeat(3,1fr) }
-    /* iPhone-Rahmen */
-    .iphone{
-      position:relative; border-radius:40px; padding:12px; background:#0b0d15; 
-      border:1px solid rgba(255,255,255,.10); box-shadow:0 18px 40px rgba(0,0,0,.45); overflow:hidden;
+    /* ===== GALLERY slider with arrows + lightbox ===== */
+    .gallery{
+      position:relative; overflow:hidden; border-radius: var(--radius);
+      box-shadow: var(--shadow); margin-top:8px;
     }
-    .iphone::before{ /* Rahmen-Glanz */
-      content:""; position:absolute; inset:0; border-radius:40px; pointer-events:none;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    .track{display:flex; gap:12px; scroll-snap-type:x mandatory; overflow:auto; padding:12px}
+    .track img{
+      height:320px; width:auto; border-radius:12px; scroll-snap-align:center; cursor:pointer;
+      object-fit:cover;
+    }
+    .arrow{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:44px; height:44px; border-radius:999px; display:grid; place-items:center;
+      background: var(--orange); color: var(--blue); font-weight:900; box-shadow: var(--shadow);
+      border:2px solid rgba(255,255,255,.35);
+    }
+    .arrow.left{left:10px} .arrow.right{right:10px}
+
+    /* Lightbox */
+    .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; align-items:center; justify-content:center; z-index:20}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:92vw; max-height:88vh; border-radius:14px; box-shadow: var(--shadow)}
+
+    /* ===== PERFORMANCE (STATSports-like iPhone frames) ===== */
+    .perf-grid{display:grid; gap:18px; grid-template-columns: repeat(3,1fr)}
+    .iphone{
+      position:relative; aspect-ratio: 9/19.5; /* iPhone ratio */
+      border-radius:28px; padding:10px;
+      background: linear-gradient(180deg, #0f0f14, #050509);
+      box-shadow: 0 16px 40px rgba(0,0,0,.55), inset 0 0 0 2px rgba(255,255,255,.06);
+    }
+    .iphone::before{ /* notch */
+      content:""; position:absolute; top:8px; left:50%; transform:translateX(-50%);
+      width:120px; height:18px; border-radius:12px; background:#000;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.06);
     }
     .iphone .screen{
-      border-radius:32px; overflow:hidden; background:#000; height:420px; position:relative;
-      border:1px solid rgba(255,255,255,.08);
+      position:absolute; inset:14px; border-radius:22px; overflow:hidden;
+      background:#000;
     }
-    .iphone .screen img{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05) contrast(1.05) }
-    .iphone .notch{
-      position:absolute; top:10px; left:50%; transform:translateX(-50%);
-      width:120px; height:22px; background:#0b0d15; border-radius:12px;
-      border:1px solid rgba(255,255,255,.08);
+    .iphone .screen img{
+      width:100%; height:100%; object-fit:cover;
+      filter: contrast(1.05) saturate(1.05);
     }
-    .iphone .caption{
-      position:absolute; left:0; right:0; bottom:0; padding:14px 16px;
-      background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(9,0,46,.92) 65%);
-      color:#fff; font-weight:900; letter-spacing:.04em; text-transform:uppercase;
+    .perf-caption{margin-top:10px; color:var(--muted); font-size:14px}
+
+    /* ===== TIME & PLACE ===== */
+    .grid-2{display:grid; gap:18px; grid-template-columns: 1.2fr .8fr}
+    .cta-box .btn{margin-top:10px}
+
+    /* ===== SPONSORS ===== */
+    .sponsors{
+      display:flex; gap:34px; align-items:center; justify-content:center; flex-wrap:wrap;
+      padding:22px 10px;
+    }
+    .sponsors img{
+      height:44px; opacity:.92; filter: invert(1) brightness(100) contrast(110);
+      mix-blend-mode: screen;
     }
 
-    /* ---------- Galerie (Lightbox) ---------- */
-    .gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px }
-    .gallery a{ border-radius:16px; overflow:hidden; display:block; line-height:0; background:#000 }
-    .gallery img{ width:100%; height:210px; object-fit:cover; display:block; transition: transform .3s ease }
-    .gallery a:hover img{ transform:scale(1.03) }
-    .lightbox{ position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; align-items:center; justify-content:center; z-index:9999 }
-    .lightbox img{ max-width:92vw; max-height:90vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.6) }
-    .lightbox.show{ display:flex }
+    /* ===== FOOTER + modal links ===== */
+    footer{padding:28px 16px 36px; text-align:center; color:#d7d9ff; font-size:14px}
+    footer a{color:#d7d9ff; text-decoration:underline dotted}
 
-    /* ---------- Trainingszeit & Standort ---------- */
-    .cols{ display:grid; gap:16px; grid-template-columns: 1.1fr .9fr }
-    .box{ background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:22px; box-shadow:0 8px 24px rgba(0,0,0,.25) }
-    .box p{ margin:.2rem 0; color:#e6e7ef }
-    .map{ border:0; width:100%; height:260px; border-radius:12px; filter: saturate(1) contrast(1.05) brightness(.95) }
-
-    /* ---------- Sponsoren ---------- */
-    .sponsors{margin-top:28px; padding:24px; border-radius:16px; border:1px solid rgba(255,255,255,.1);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)); box-shadow:0 10px 30px rgba(0,0,0,.25); text-align:center}
-    .sponsors h3{margin:0 0 16px}
-    .sponsor-row{display:flex; gap:min(8vw,36px); justify-content:center; align-items:center; flex-wrap:wrap}
-    .sponsor-row img{height:44px; object-fit:contain; opacity:.95; filter:grayscale(1) brightness(0) invert(1)} /* -> weiß */
-
-    /* ---------- Footer ---------- */
-    footer{ padding:26px 18px; text-align:center; color:#cfd3ec; background:#0a0c1f }
-    .legal{ margin-top:6px; font-size:.92rem }
-    footer a{text-decoration:underline}
-
-    /* ---------- Responsive ---------- */
-    @media (max-width: 980px){
-      .brand-logo{ width:110px; top:18px; right:18px }
-      .grid-why{ grid-template-columns:1fr }
-      .perf-grid{ grid-template-columns:1fr }
-      .gallery{ grid-template-columns:1fr 1fr }
-      .cols{ grid-template-columns:1fr }
-      .map{ height:220px }
-      .iphone .screen{height:420px}
+    /* MODAL (Impressum/Datenschutz) */
+    .modal{position:fixed; inset:0; background:rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index:40}
+    .modal.open{display:flex}
+    .modal .box{
+      width:min(860px, 92vw); max-height:86vh; overflow:auto;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:16px; padding:22px;
+      box-shadow: var(--shadow);
     }
-    @media (max-width: 560px){
-      .brand-logo{ width:92px; top:14px; right:14px }
-      .gallery{ grid-template-columns:1fr }
+    .close{position:sticky; top:0; float:right; background:#000; color:#fff; border:0; padding:8px 12px; border-radius:8px; cursor:pointer}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .why{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      .perf-grid{grid-template-columns:1fr;}
+      .topbar img{height:72px}
+      .track img{height:260px}
     }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
-  <header class="hero">
-    <img class="brand-logo" src="Logo%20NEU%20DKF%20Transparent.png" alt="Deister Kicker Logo" />
-    <div>
-      <div class="pill">Training  Technik  Athletik  Talentförderung</div>
-      <h1>DEISTER-KICKER-FUSSBALLSCHULE</h1>
-      <p class="lead"><strong>Wo aus Talent Entwicklung wird.</strong></p>
+  <!-- Logo oben rechts -->
+  <div class="topbar">
+    <img src="Logo NEU DKF Transparent.png" alt="Deister Kicker Logo">
+  </div>
 
-      <div class="cta">
-        <a class="btn btn-primary" href="https://wa.me/4917661779069" target="_blank" rel="noopener">WhatsApp – Probetraining anfragen</a>
-        <a class="btn btn-primary" href="mailto:info@deister-kicker.de?subject=Anfrage%20Probetraining%20Deister%20Kicker&body=Hallo%20Deister%20Kicker%20Team,%0D%0A%0D%0Aich%20m%C3%B6chte%20mich%20zum%20Probetraining%20anmelden.%20Meine%20R%C3%BCckrufnummer:%20_____%0D%0ADanke!">E-Mail senden</a>
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="inner">
+      <div class="eyebrow">Dunkel · Dramatisch · Kontrast · Profi-Stil</div>
+      <h1 class="title">DEISTER KICKER FUSSBALLSCHULE</h1>
+      <p class="subtitle">
+        Moderne, spielnahe Einheiten für motivierte Spielerinnen &amp; Spieler ab 5 Jahren.
+        Fokus: Spaß am Ball · klare Methodik · individuelle Entwicklung.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-orange" href="https://wa.me/4917661779069" target="_blank" rel="noopener">WhatsApp – Probetraining anfragen</a>
+        <a class="btn btn-ghost" href="mailto:info@deisterkicker.de">E-Mail senden</a>
       </div>
     </div>
   </header>
 
-  <!-- HIGHLIGHTS (statt „Performance & Analyse“) -->
-  <section class="section">
-    <div class="wrap">
-      <h2 class="perf-title">HIGHLIGHTS AUS UNSEREM TRAINING</h2>
-      <p class="perf-sub">Einblicke in unsere Arbeitsweise – modern, motivierend, nahe am Spiel.</p>
+  <a class="scrollup" href="#top" aria-label="Nach oben">↑</a>
 
-      <div class="perf-grid">
-        <!-- iPhone-Karte 1 -->
-        <article class="iphone">
-          <div class="screen">
-            <img src="promo-1.jpg" alt="Gemeinsam stärker – sei dabei">
-            <div class="notch" aria-hidden="true"></div>
-            <div class="caption">Gemeinsam stärker – sei dabei</div>
-          </div>
-        </article>
+  <main class="wrap">
 
-        <!-- iPhone-Karte 2 -->
-        <article class="iphone">
-          <div class="screen">
-            <img src="promo-2.jpg" alt="Fokus & Technik">
-            <div class="notch" aria-hidden="true"></div>
-            <div class="caption">Fokus &amp; Technik</div>
-          </div>
-        </article>
-
-        <!-- iPhone-Karte 3 -->
-        <article class="iphone">
-          <div class="screen">
-            <img src="promo-3.jpg" alt="Teamgeist & Leidenschaft">
-            <div class="notch" aria-hidden="true"></div>
-            <div class="caption">Teamgeist &amp; Leidenschaft</div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- WARUM WIR -->
-  <section class="section" style="padding-top:28px">
-    <div class="wrap">
-      <h2>WARUM WIR?</h2>
-      <div class="grid-why">
-        <div class="card">
-          <div class="icon">⚡</div>
+    <!-- WHY US -->
+    <h2 class="section-title">WARUM WIR?</h2>
+    <div class="why">
+      <div class="card item">
+        <div class="icon">⚡</div>
+        <div>
           <h3>Individuelle Entwicklung</h3>
           <p>Gezielte Förderung je nach Leistungsstand. Persönliche Ziele, klare Fortschritte, echtes Feedback.</p>
         </div>
-        <div class="card">
-          <div class="icon">⚽</div>
+      </div>
+      <div class="card item">
+        <div class="icon">🎯</div>
+        <div>
           <h3>Spielnah & modern</h3>
           <p>Methodik auf neuestem Stand: viel Ballkontakt, Spielformen, smarte Technik-Drills.</p>
         </div>
-        <div class="card">
-          <div class="icon">🤝</div>
+      </div>
+      <div class="card item">
+        <div class="icon">🤝</div>
+        <div>
           <h3>Familiäre Trainer-Atmosphäre</h3>
-          <p>Leidenschaftlich, nahbar, respektvoll. Vertrauen & Spaß sind die Grundlage für Leistung.</p>
+          <p>Leidenschaftlich, nahbar, respektvoll. Vertrauen &amp; Spaß sind die Grundlage für Leistung.</p>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- EINDRÜCKE (Galerie + Lightbox) -->
-  <section class="section" style="padding-top:28px">
-    <div class="wrap">
-      <h2>EINDRÜCKE AUS DEM TRAINING</h2>
-      <div class="gallery" id="gal">
-        <a href="gallery-1.jpg"><img src="gallery-1.jpg" alt="Training 1"></a>
-        <a href="gallery-2.jpg"><img src="gallery-2.jpg" alt="Training 2"></a>
-        <a href="gallery-3.jpg"><img src="gallery-3.jpg" alt="Training 3"></a>
-        <a href="gallery-4.jpg"><img src="gallery-4.jpg" alt="Training 4"></a>
-        <a href="gallery-5.jpg"><img src="gallery-5.jpg" alt="Training 5"></a>
-        <a href="gallery-6.jpg"><img src="gallery-6.jpg" alt="Training 6"></a>
+    <!-- GALLERY -->
+    <h2 class="section-title" style="margin-top:36px">EINDRÜCKE AUS DEM TRAINING</h2>
+    <div class="card gallery" id="gal">
+      <button class="arrow left" aria-label="Zurück" onclick="galScroll(-1)">‹</button>
+      <div class="track" id="track">
+        <img src="gallery-1.jpg" alt="Training 1" onclick="openLightbox(this.src)">
+        <img src="gallery-2.jpg" alt="Training 2" onclick="openLightbox(this.src)">
+        <img src="gallery-3.jpg" alt="Training 3" onclick="openLightbox(this.src)">
+        <img src="gallery-4.jpg" alt="Training 4" onclick="openLightbox(this.src)">
+        <img src="gallery-5.jpg" alt="Training 5" onclick="openLightbox(this.src)">
+        <img src="gallery-6.jpg" alt="Training 6" onclick="openLightbox(this.src)">
+      </div>
+      <button class="arrow right" aria-label="Weiter" onclick="galScroll(1)">›</button>
+    </div>
+    <p style="opacity:.65;margin:.5rem 4px 0">Tipp: Bild anklicken – Lightbox öffnet sich in groß.</p>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+      <img id="lbimg" src="" alt="Foto">
+    </div>
+
+    <!-- PERFORMANCE / PROMO CARDS -->
+    <h2 class="section-title" style="margin-top:44px">GEMEINSAM STÄRKER – SEI DABEI</h2>
+    <p style="opacity:.8; margin:-4px 0 14px">Starke Eindrücke – moderner Fußball-Vibe in unseren Farben.</p>
+
+    <div class="perf-grid">
+      <div>
+        <div class="iphone">
+          <div class="screen"><img src="promo-1.jpg" alt="Promo 1"></div>
+        </div>
+        <div class="perf-caption">Drive &amp; Dynamik – Training im Fokus.</div>
+      </div>
+      <div>
+        <div class="iphone">
+          <div class="screen"><img src="promo-2.jpg" alt="Promo 2"></div>
+        </div>
+        <div class="perf-caption">Modernes Setup – klare Optik, klare Ziele.</div>
+      </div>
+      <div>
+        <div class="iphone">
+          <div class="screen"><img src="promo-3.jpg" alt="Promo 3"></div>
+        </div>
+        <div class="perf-caption">Motivation &amp; Teamspirit – gemeinsam besser werden.</div>
       </div>
     </div>
-    <div class="lightbox" id="lb"><img alt="Bild in groß"></div>
-  </section>
 
-  <!-- TRAININGSZEIT & STANDORT + SPONSOREN -->
-  <section class="section" style="padding-top:28px">
-    <div class="wrap">
-      <h2>TRAININGSZEIT & STANDORT</h2>
-      <div class="cols">
-        <div class="box">
-          <p><strong>TSV HAMELSPRINGE • SPORTPLATZ</strong></p>
-          <p><strong>Montag:</strong> 16:45 – 18:15 Uhr (Beginn 16:45)</p>
-          <p><strong>Adresse:</strong> Kösterbrink 2, 31848 Bad Münder am Deister</p>
-          <p style="margin-top:10px">Fragen? Wir freuen uns über jede Anfrage – hier beginnt die Förderung deines Kindes.
-            Einfach per <strong>WhatsApp</strong> oder <strong>E-Mail</strong> Kontakt aufnehmen.</p>
-          <div class="cta" style="justify-content:flex-start">
-            <a class="btn btn-primary" href="https://wa.me/4917661779069" target="_blank" rel="noopener">WhatsApp schreiben</a>
-            <a class="btn btn-ghost" href="mailto:info@deister-kicker.de?subject=Anfrage%20Probetraining%20Deister%20Kicker">E-Mail senden</a>
-          </div>
-        </div>
-
-        <div class="box">
-          <iframe class="map"
-            src="https://www.google.com/maps?q=K%C3%B6sterbrink%202%2C%2031848%20Bad%20M%C3%BCnder%20am%20Deister&output=embed"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="TSV Hamelspringe – Sportplatz"></iframe>
-
-          <!-- Sponsoren -->
-          <div class="sponsors" style="margin-top:18px">
-            <h3>UNTERSTÜTZER UNSERER FUSSBALLSCHULE</h3>
-            <div class="sponsor-row">
-              <img src="sponsor-1.png" alt="Sponsor 1" onerror="this.style.display='none'">
-              <img src="sponsor-2.png" alt="Sponsor 2" onerror="this.style.display='none'">
-            </div>
-          </div>
+    <!-- TIME & PLACE -->
+    <h2 class="section-title" style="margin-top:48px">TRAININGSZEIT &amp; STANDORT</h2>
+    <div class="grid-2">
+      <div class="card cta-box">
+        <h3 style="margin:6px 0 8px; text-transform:uppercase">TSV HAMELSPRINGE • SPORTPLATZ</h3>
+        <p style="margin:0"><strong>Montag:</strong> 16:45 – 18:15 Uhr (Beginn 16:45)</p>
+        <p style="margin:6px 0 10px"><strong>Adresse:</strong> Kösterbrink 2, 31848 Bad Münder am Deister</p>
+        <p style="opacity:.9">
+          <strong>Fragen?</strong> Wir freuen uns über jede Anfrage.
+          Hier beginnt die Förderung deines Kindes – melde dich einfach per WhatsApp oder E-Mail.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-orange" href="https://wa.me/4917661779069" target="_blank" rel="noopener">WhatsApp schreiben</a>
+          <a class="btn btn-ghost" href="mailto:info@deisterkicker.de">Mail senden</a>
         </div>
       </div>
+      <div class="card" style="overflow:hidden">
+        <iframe
+          title="Karte Kösterbrink 2"
+          width="100%" height="280" style="border:0;border-radius:12px"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=K%C3%B6sterbrink%202%2C%2031848%20Bad%20M%C3%BCnder%20am%20Deister&output=embed">
+        </iframe>
+      </div>
     </div>
-  </section>
 
-  <!-- FOOTER + Modale (Impressum/Datenschutz) -->
+    <!-- SPONSORS -->
+    <h2 class="section-title" style="margin-top:48px">UNTERSTÜTZER UNSERER FUSSBALLSCHULE</h2>
+    <div class="card">
+      <div class="sponsors">
+        <!-- Lege deine PNGs in das Repo; einfach weitere <img> hinzufügen -->
+        <img src="sponsor-1.png" alt="Sponsor 1">
+        <img src="sponsor-2.png" alt="Sponsor 2">
+      </div>
+    </div>
+
+    <!-- Instagram CTA (stabil & klickbar; echte Embeds sind ohne API oft blockiert) -->
+    <div class="card" style="margin-top:22px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap">
+      <div style="display:flex; align-items:center; gap:12px">
+        <div class="icon" style="width:40px;height:40px;border-radius:8px;font-size:20px;">IG</div>
+        <div>
+          <div style="opacity:.9">Folge uns auf Instagram</div>
+          <strong>@deister_kicker</strong>
+        </div>
+      </div>
+      <a class="btn btn-ghost" href="https://www.instagram.com/deister_kicker" target="_blank" rel="noopener">Instagram ansehen</a>
+    </div>
+
+  </main>
+
   <footer>
-    <div>© Deister Kicker Fussballschule · 2025</div>
-    <div class="legal">
-      <a href="#" id="openImpressum">Impressum</a> ·
-      <a href="#" id="openDatenschutz">Datenschutz</a>
-    </div>
+    <a href="#" onclick="openModal('imp');return false;">Impressum</a> ·
+    <a href="#" onclick="openModal('dp');return false;">Datenschutz</a>
+    <div style="opacity:.8;margin-top:8px">© Deister Kicker Fussballschule · 2025</div>
   </footer>
 
-  <script>
-    /* Lightbox Galerie */
-    const lb = document.getElementById('lb');
-    const lbImg = lb.querySelector('img');
-    document.getElementById('gal').addEventListener('click', e=>{
-      const a = e.target.closest('a');
-      if(!a) return;
-      e.preventDefault();
-      lbImg.src = a.getAttribute('href');
-      lb.classList.add('show');
-    });
-    lb.addEventListener('click', ()=> lb.classList.remove('show'));
+  <!-- MODALS -->
+  <div id="imp" class="modal" aria-hidden="true">
+    <div class="box">
+      <button class="close" onclick="closeModal('imp')">Schließen ✕</button>
+      <h3>Impressum</h3>
+      <p><strong>Deister Kicker Fussballschule</strong><br>(ein Projekt der Agentur Players Factory)</p>
+      <p><strong>Geschäftsführender Inhaber:</strong> Toni Kierakowitz</p>
+      <p>Hamelspringer Straße 36<br>31848 Bad Münder am Deister</p>
+      <p>E-Mail: <a href="mailto:info@deisterkicker.de">info@deisterkicker.de</a></p>
+    </div>
+  </div>
 
-    /* Modale Fenster */
-    const showModal = (html) => {
-      const modal = document.createElement('div');
-      modal.className = 'lightbox show';
-      modal.innerHTML = `<div style="max-width:900px;max-height:84vh;overflow:auto;background:#0b0f26;color:#fff;padding:22px 20px;border-radius:12px;box-shadow:0 20px 70px rgba(0,0,0,.6)">
-        ${html}
-      </div>`;
-      modal.addEventListener('click', e=>{ if(e.target===modal) modal.remove(); });
-      document.body.appendChild(modal);
-    };
-    document.getElementById('openImpressum').addEventListener('click', (e)=>{
-      e.preventDefault();
-      showModal(`
-        <h3 style="margin:0 0 10px;letter-spacing:.05em;text-transform:uppercase">Impressum</h3>
-        <p><strong>Deister Kicker Fussballschule</strong><br>(ein Projekt der Agentur Players Factory)</p>
-        <p><strong>Geschäftsführender Inhaber:</strong> Toni Kierakowitz</p>
-        <p>Hamelspringer Straße 36<br>31848 Bad Münder am Deister</p>
-        <p><a href="mailto:info@deister-kicker.de" style="color:#9ac6ff">info@deister-kicker.de</a></p>
-      `);
-    });
-    document.getElementById('openDatenschutz').addEventListener('click', (e)=>{
-      e.preventDefault();
-      showModal(`
-        <h3 style="margin:0 0 10px;letter-spacing:.05em;text-transform:uppercase">Datenschutz</h3>
-        <p>Wir verarbeiten personenbezogene Daten ausschließlich zur Beantwortung von Anfragen und zur Durchführung des Trainingsbetriebs.
-        Rechtsgrundlage ist Art. 6 Abs. 1 lit. b und f DSGVO. Eine Weitergabe erfolgt nicht.
-        Bei Fragen oder Auskunftsersuchen wende dich an <a href="mailto:info@deister-kicker.de" style="color:#9ac6ff">info@deister-kicker.de</a>.</p>
-      `);
-    });
+  <div id="dp" class="modal" aria-hidden="true">
+    <div class="box">
+      <button class="close" onclick="closeModal('dp')">Schließen ✕</button>
+      <h3>Datenschutz</h3>
+      <p>Wir verarbeiten personenbezogene Daten (z. B. Name, Telefonnummer, E-Mail) ausschließlich zur Bearbeitung von Anfragen und zur Durchführung des Trainingsbetriebs. Eine Weitergabe an Dritte erfolgt nicht.</p>
+      <p>Kontakt für Auskunft und Löschung: <a href="mailto:info@deisterkicker.de">info@deisterkicker.de</a></p>
+    </div>
+  </div>
+
+  <script>
+    // Gallery arrows
+    const track = document.getElementById('track');
+    function galScroll(dir){ track.scrollBy({left: dir * (track.clientWidth * .8), behavior:'smooth'}); }
+
+    // Lightbox
+    const lb = document.getElementById('lightbox');
+    const lbimg = document.getElementById('lbimg');
+    function openLightbox(src){ lbimg.src = src; lb.classList.add('open'); }
+    function closeLightbox(e){ if(e.target === lb) lb.classList.remove('open'); }
+
+    // Modals
+    function openModal(id){ document.getElementById(id).classList.add('open'); }
+    function closeModal(id){ document.getElementById(id).classList.remove('open'); }
   </script>
 </body>
 </html>
