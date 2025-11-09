@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Deister Kicker Fussballschule</title>
 
-  <!-- Farben -->
   <style>
     :root{
       --blue:#0F0147;
@@ -19,23 +18,23 @@
       --shadow: 0 10px 30px rgba(0,0,0,.35);
       --radius: 16px;
     }
-
-    /* Reset + Basics */
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;height:100%;background:var(--blue-80);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
     a{text-decoration:none;color:inherit}
     img{max-width:100%;display:block}
 
-    /* --- Top Logo rechts --- */
-    .topbar{
-      position:absolute; inset:16px 16px auto auto; z-index:5;
-      background:rgba(255,255,255,.06); backdrop-filter:saturate(140%) blur(4px);
-      border:1px solid rgba(255,255,255,.15);
-      border-radius:12px; padding:8px; box-shadow: var(--shadow);
+    /* ======= Logo oben rechts – groß, ohne Umrandung / Kasten ======= */
+    .logo-fixed{
+      position:absolute; top:18px; right:18px; z-index:6;
     }
-    .topbar img{height:86px; width:auto}
+    .logo-fixed img{
+      height: clamp(88px, 10vw, 130px);  /* -> deutlich größer */
+      width:auto;
+      /* keine Box, kein Rahmen; minimale weiche Kante: */
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
+    }
 
-    /* --- Hero --- */
+    /* ======= HERO ======= */
     .hero{
       position:relative; min-height:92vh; display:grid; place-items:center;
       overflow:hidden; background:#000;
@@ -45,31 +44,29 @@
       background:url("Fussball Kids Banner.jpg") center/cover no-repeat;
       transform:scale(1.02);
     }
-    /* nur oben verlauf, unten wird klarer */
+    /* Verlauf nur oben, unten klarer – minimal dunkler für bessere Lesbarkeit */
     .hero::after{
       content:""; position:absolute; inset:0;
-      background:linear-gradient(180deg, rgba(15,1,71,.85) 0%, rgba(15,1,71,.55) 35%, rgba(15,1,71,.2) 58%, rgba(15,1,71,.0) 78%);
+      background:linear-gradient(180deg,
+        rgba(15,1,71,.88) 0%,
+        rgba(15,1,71,.60) 34%,
+        rgba(15,1,71,.24) 58%,
+        rgba(15,1,71,0) 78%);
       pointer-events:none;
     }
-    .hero-inner{
-      position:relative; z-index:1; text-align:center; padding:0 18px; max-width:1080px;
-    }
-    .chips{display:inline-flex; gap:14px; padding:8px 14px; border-radius:999px;
+    .hero-inner{position:relative; z-index:1; text-align:center; padding:0 18px; max-width:1080px}
+    .chips{display:inline-flex; gap:12px; padding:8px 14px; border-radius:999px;
       background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.18);
-      box-shadow: var(--shadow); font-weight:600}
+      box-shadow: var(--shadow); font-weight:700}
     .title{
       margin:18px 0 10px; font-size: clamp(28px, 5vw, 56px); line-height:1.05;
       letter-spacing:.6px; font-weight:900; color:var(--orange); text-transform:uppercase;
       text-shadow: 0 10px 28px rgba(0,0,0,.45);
     }
-    .subtitle{
-      max-width:900px; margin:0 auto 16px; line-height:1.55; font-weight:600;
-      text-shadow:0 12px 28px rgba(0,0,0,.45)
-    }
-
+    .subtitle{max-width:900px; margin:0 auto 16px; line-height:1.55; font-weight:600; text-shadow:0 12px 28px rgba(0,0,0,.45)}
     .cta-row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:12px}
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
       padding:12px 18px; border-radius:12px; font-weight:800; letter-spacing:.2px;
       border:1px solid rgba(255,255,255,.18); box-shadow: var(--shadow);
       transition:.2s transform ease,.2s filter ease,.2s background ease,.2s color ease;
@@ -79,38 +76,25 @@
     .btn--wa{background:var(--orange); color:#0F0147}
     .btn--mail{background:var(--orange); color:#0F0147}
 
-    /* --- Sections --- */
+    /* ======= Sections ======= */
     section{padding:56px 20px}
     .wrap{max-width:1100px; margin:0 auto}
-
     h2{margin:0 0 22px; font-size: clamp(22px, 3.4vw, 34px); letter-spacing:.6px; text-transform:uppercase}
 
     /* Vorteile */
     .benefits{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
-      border:1px solid rgba(255,255,255,.16);
-      border-radius:18px; padding:18px; box-shadow: var(--shadow)
-    }
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05)); border:1px solid rgba(255,255,255,.16); border-radius:18px; padding:18px; box-shadow: var(--shadow)}
     .card h3{margin:0 0 6px; font-size:20px}
     .card .icon{font-size:28px; margin-bottom:8px; color:var(--orange)}
 
-    /* Galerie Slider (hochkant besser sichtbar) */
+    /* Galerie – hochkant freundlicher + Lightbox */
     .gallery{position:relative}
-    .slider{
-      display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:6px;
-    }
-    .slide{min-width: 300px; max-width: 380px; height: 540px; border-radius:18px; overflow:hidden;
-      scroll-snap-align:center; background:#000; position:relative; flex:0 0 auto; box-shadow:var(--shadow)}
+    .slider{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:6px}
+    .slide{min-width: 300px; max-width: 380px; height: 540px; border-radius:18px; overflow:hidden; scroll-snap-align:center; background:#000; position:relative; flex:0 0 auto; box-shadow:var(--shadow)}
     .slide img{width:100%; height:100%; object-fit:cover; cursor:pointer}
-    .g-arrow{
-      position:absolute; top:50%; transform:translateY(-50%); z-index:2;
-      background:var(--orange); color:var(--blue); border:none; width:42px; height:42px;
-      border-radius:50%; box-shadow: var(--shadow); cursor:pointer; display:grid; place-items:center
-    }
+    .g-arrow{position:absolute; top:50%; transform:translateY(-50%); z-index:2; background:var(--orange); color:var(--blue); border:none; width:42px; height:42px; border-radius:50%; box-shadow: var(--shadow); cursor:pointer; display:grid; place-items:center}
     .g-arrow.left{left:-4px} .g-arrow.right{right:-4px}
 
-    /* Lightbox */
     .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; place-items:center; z-index:1000}
     .lightbox.open{display:grid}
     .lightbox img{max-width:92vw; max-height:90vh; border-radius:12px}
@@ -121,41 +105,44 @@
     .panel strong{color:var(--white)}
     .panel .btn{margin-top:10px}
 
-    /* Instagram-CTA */
-    .ig{display:flex; align-items:center; justify-content:space-between; gap:18px; background:var(--glass); border:1px solid rgba(255,255,255,.16); border-radius:18px; padding:18px; box-shadow:var(--shadow)}
-    .ig .badge{display:flex; align-items:center; gap:10px; font-weight:700}
-    .ig .badge .dot{width:28px; height:28px; border-radius:8px; background:var(--orange); display:inline-block}
+    /* Instagram – neu & cleaner */
+    .ig{display:flex; align-items:center; justify-content:space-between; gap:18px; background:linear-gradient(90deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); border:1px solid rgba(255,255,255,.16); border-radius:18px; padding:18px; box-shadow:var(--shadow)}
+    .ig .left{display:flex; align-items:center; gap:14px}
+    .ig .logo{width:34px; height:34px; border-radius:8px; background:var(--orange)}
+    .ig .handle{font-weight:800}
 
-    /* Sponsoren */
-    .sponsors{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:20px}
-    .slogos{display:flex; justify-content:center; align-items:center; gap:28px; flex-wrap:wrap}
-    .slogos img{height:34px; filter:brightness(0) invert(1); opacity:.95}
+    /* Sponsoren – größer + weiß */
+    .sponsors{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:22px}
+    .slogos{display:flex; justify-content:center; align-items:center; gap:38px; flex-wrap:wrap}
+    .slogos img{height:48px; filter:brightness(0) invert(1); opacity:.95}
 
     /* Footer */
     footer{padding:28px 20px 40px; text-align:center; color:#cfd6ff7a}
     footer a{color:#cfd6ff; text-decoration:underline}
 
     /* Back to top */
-    .to-top{
-      position:fixed; right:18px; bottom:18px; width:46px; height:46px; border-radius:50%;
-      display:grid; place-items:center; background:var(--orange); color:var(--blue); box-shadow:var(--shadow);
-      cursor:pointer; z-index:50
-    }
+    .to-top{position:fixed; right:18px; bottom:18px; width:46px; height:46px; border-radius:50%; display:grid; place-items:center; background:var(--orange); color:var(--blue); box-shadow:var(--shadow); cursor:pointer; z-index:50}
 
-    /* Responsive */
+    /* ======= Modals (Impressum/Datenschutz) ======= */
+    .modal{position:fixed; inset:0; background:rgba(0,0,0,.65); display:none; align-items:center; justify-content:center; z-index:2000; padding:18px}
+    .modal.open{display:flex}
+    .modal .box{background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06)); border:1px solid rgba(255,255,255,.18); border-radius:18px; padding:22px; max-width:760px; width:100%; box-shadow:var(--shadow)}
+    .modal h3{margin:0 0 10px; font-size:22px}
+    .modal .close{position:absolute; top:20px; right:24px; font-size:28px; cursor:pointer}
+
     @media (max-width: 900px){
-      .topbar img{height:70px}
       .benefits{grid-template-columns:1fr}
       .grid-2{grid-template-columns:1fr}
       .slide{min-width:65vw; height: 64vh}
+      .logo-fixed img{height: clamp(78px, 14vw, 120px)}
     }
   </style>
 </head>
 <body>
 
-  <!-- Logo oben rechts -->
-  <div class="topbar">
-    <img src="Logo NEU DKF Transparent.png" alt="Deister Kicker Logo" />
+  <!-- Logo oben rechts – groß, ohne Box -->
+  <div class="logo-fixed" aria-label="Deister Kicker Logo">
+    <img src="Logo NEU DKF Transparent.png" alt="Deister Kicker Logo">
   </div>
 
   <!-- HERO -->
@@ -229,7 +216,7 @@
             <strong>Montag:</strong> 16:45 – 18:15 Uhr (Beginn 16:45)<br>
             <strong>Adresse:</strong> Kösterbrink 2, 31848 Bad Münder am Deister
           </p>
-          <p>Fragen? Wir freuen uns über jede Anfrage – einfach per WhatsApp oder E-Mail melden.</p>
+          <p><strong>Hier beginnt die Förderung deines Kindes.</strong> Wir freuen uns über jede Anfrage – einfach per WhatsApp oder E-Mail kontaktieren.</p>
           <div class="cta-row" style="justify-content:flex-start">
             <a class="btn btn--wa" href="https://wa.me/4917661779069?text=Hallo%20Deister%20Kicker!%20Ich%20m%C3%B6chte%20mich%20zum%20Probetraining%20anmelden." target="_blank" rel="noopener">WhatsApp schreiben</a>
             <a class="btn btn--mail" href="mailto:info@deister-kicker.de?subject=Anfrage%20Probetraining&body=Hallo%20Deister%20Kicker,%0Aich%20m%C3%B6chte%20mich%20zum%20Probetraining%20anmelden.">Mail senden</a>
@@ -248,14 +235,15 @@
     </div>
   </section>
 
-  <!-- Instagram CTA -->
+  <!-- Instagram – clean Bar -->
   <section>
     <div class="wrap">
       <div class="ig">
-        <div class="badge">
-          <span class="dot"></span>
+        <div class="left">
+          <span class="logo" aria-hidden="true"></span>
           <div>
-            Folge uns auf Instagram<br><strong>@deister_kicker</strong>
+            Folge uns auf Instagram<br>
+            <span class="handle">@deister_kicker</span>
           </div>
         </div>
         <a class="btn" style="background:var(--glass-2); color:var(--white)" target="_blank" rel="noopener" href="https://www.instagram.com/deister_kicker">Instagram ansehen</a>
@@ -267,11 +255,12 @@
   <section>
     <div class="wrap">
       <div class="sponsors">
-        <div style="text-align:center; opacity:.9; margin-bottom:10px; letter-spacing:.6px; text-transform:uppercase">Unterstützt unsere Fussballschule</div>
+        <div style="text-align:center; opacity:.9; margin-bottom:12px; letter-spacing:.6px; text-transform:uppercase">
+          Unterstützer unserer Fussballschule
+        </div>
         <div class="slogos">
-          <!-- Lade deine Logos als sponsor-1.png / sponsor-2.png hoch (Farbe egal, wird weiß gefiltert) -->
-          <img src="sponsor-1.png" alt="Sponsor 1" />
-          <img src="sponsor-2.png" alt="Sponsor 2" />
+          <img src="sponsor-1.png" alt="Sponsor 1">
+          <img src="sponsor-2.png" alt="Sponsor 2">
         </div>
       </div>
     </div>
@@ -280,7 +269,8 @@
   <!-- Footer -->
   <footer>
     <div class="wrap" style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:8px">
-      <a href="#impressum">Impressum</a> • <a href="#datenschutz">Datenschutz</a>
+      <a href="#" onclick="openModal('impressum');return false;">Impressum</a> •
+      <a href="#" onclick="openModal('datenschutz');return false;">Datenschutz</a>
     </div>
     © Deister Kicker Fussballschule · 2025
   </footer>
@@ -288,45 +278,59 @@
   <!-- Back to top -->
   <a class="to-top" href="#top" aria-label="Nach oben">↑</a>
 
-  <!-- Impressum & Datenschutz (Anker) -->
-  <section id="impressum" class="wrap" style="padding:30px 20px 60px">
-    <h2>Impressum</h2>
-    <div class="panel">
+  <!-- ======= MODALS ======= -->
+  <div class="modal" id="modal-impressum" aria-hidden="true">
+    <div class="box">
+      <div class="close" onclick="closeModal('impressum')">✕</div>
+      <h3>Impressum</h3>
       <p><strong>Deister Kicker Fussballschule</strong><br>(ein Projekt der Agentur Players Factory)</p>
       <p><strong>Geschäftsführender Inhaber:</strong> Toni Kierakowitz</p>
       <p>Hamelspringer Straße 36<br>31848 Bad Münder am Deister</p>
       <p>E-Mail: <a href="mailto:info@deister-kicker.de">info@deister-kicker.de</a></p>
     </div>
-  </section>
+  </div>
 
-  <section id="datenschutz" class="wrap" style="padding:0 20px 80px">
-    <h2>Datenschutz</h2>
-    <div class="panel">
+  <div class="modal" id="modal-datenschutz" aria-hidden="true">
+    <div class="box">
+      <div class="close" onclick="closeModal('datenschutz')">✕</div>
+      <h3>Datenschutz</h3>
       <p>Wir verarbeiten auf dieser Seite keine personenbezogenen Daten außer den Inhalten,
-        die du uns aktiv per WhatsApp oder E-Mail sendest. Für eingebettete Inhalte (z.&nbsp;B. Google-Maps)
-        gilt die Datenschutz-Erklärung des jeweiligen Anbieters. Wenn du Fragen hast, melde dich unter
-        <a href="mailto:info@deister-kicker.de">info@deister-kicker.de</a>.</p>
+        die du uns aktiv per WhatsApp oder E-Mail sendest. Für eingebettete Inhalte
+        (z.&nbsp;B. Google-Maps) gilt die Datenschutz-Erklärung des jeweiligen Anbieters.
+        Fragen? <a href="mailto:info@deister-kicker.de">info@deister-kicker.de</a>.</p>
     </div>
-  </section>
+  </div>
 
-  <!-- Mini-Script: Slider & Lightbox -->
+  <!-- ======= SCRIPTS ======= -->
   <script>
+    // Galerie-Scroll
     const slider = document.getElementById('slider');
     function scrollGallery(dir){
-      const w = slider.querySelector('.slide').offsetWidth + 14;
-      slider.scrollBy({left: dir * w, behavior:'smooth'});
+      const card = slider.querySelector('.slide');
+      const step = (card ? card.offsetWidth : 360) + 14;
+      slider.scrollBy({left: dir * step, behavior:'smooth'});
     }
+
     // Lightbox
     const lb = document.createElement('div');
     lb.className = 'lightbox';
     lb.innerHTML = '<img alt=""><div style="position:fixed;top:24px;right:24px;font-size:28px;color:#fff;cursor:pointer" onclick="closeLightbox()">✕</div>';
     document.body.appendChild(lb);
-    function openLightbox(src){
-      lb.querySelector('img').src = src;
-      lb.classList.add('open');
-    }
+    function openLightbox(src){ lb.querySelector('img').src = src; lb.classList.add('open'); }
     function closeLightbox(){ lb.classList.remove('open'); }
     lb.addEventListener('click', e => { if(e.target === lb) closeLightbox(); });
+
+    // Modals
+    function openModal(which){
+      document.getElementById('modal-' + which).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(which){
+      document.getElementById('modal-' + which).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    // Schließen mit ESC
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ closeModal('impressum'); closeModal('datenschutz'); }});
   </script>
 </body>
 </html>
