@@ -3,262 +3,272 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Deister Kicker Fussballschule</title>
+<title>DEISTER KICKER FUSSBALLSCHULE</title>
 
 <style>
   :root{
-    --blue:#0F0147; --blue-dark:#0b0138; --orange:#F87903; --white:#fff;
-    --text:#eaeaf2; --muted:#cfd3ff; --card:#101226; --card2:#0c0f20;
+    --blue:#0F0147;
+    --blue-dark:#080138;
+    --orange:#F87903;
+    --white:#ffffff;
+    --muted:#d8deee;
+    --glass:rgba(15,1,71,.55);
+    --shadow:0 10px 28px rgba(0,0,0,.28);
+    --radius:18px;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:var(--blue-dark);color:var(--text)}
+  html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--blue-dark),#121b66);color:var(--muted);font-family:Arial,Helvetica,sans-serif}
+  a{text-decoration:none;color:inherit}
+  .container{max-width:1120px;margin:0 auto;padding:0 20px}
 
-  /* TOPBAR – LOGO RECHTS, GRÖSSER */
-  .topbar{
-    position:absolute; inset:0 0 auto 0; height:90px;
-    display:flex; justify-content:flex-end; align-items:center;
-    padding:18px 28px; z-index:30;
+  /* ---------- Topbar (Logo rechts) ---------- */
+  .topbar{position:absolute; inset:0 0 auto 0; height:92px; display:flex; justify-content:flex-end; align-items:center; padding:14px 22px; pointer-events:none;}
+  .brand{display:flex;align-items:center;gap:12px; pointer-events:auto}
+  .brand img{height:96px; width:auto; display:block; filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative; min-height:94vh; display:grid; place-items:center; text-align:center; overflow:hidden; background:#000;}
+  .hero::before{content:""; position:absolute; inset:0; background:url("Fussball Kids Banner.jpg") center/cover no-repeat; transform:scale(1.02);}
+  /* oben kräftig, wird bis unter die Headline klar */
+  .hero::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(8,1,56,.82) 0%, rgba(16,10,80,.58) 28%, rgba(16,10,80,.22) 52%, rgba(16,10,80,.08) 70%, rgba(16,10,80,0) 85%);
   }
-  .topbar img{
-    height:96px; width:auto; display:block;
-    filter:drop-shadow(0 4px 14px rgba(0,0,0,.45));
-  }
-  @media (max-width:1024px){ .topbar img{height:84px} }
-  @media (max-width:640px){ .topbar img{height:64px} }
+  .hero-inner{position:relative; z-index:1; padding:0 24px; max-width:1000px; color:var(--white); text-shadow:0 2px 8px rgba(0,0,0,.35);}
+  .eyebrow{display:inline-block; padding:8px 14px; border-radius:999px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); backdrop-filter:blur(6px); margin-bottom:12px; font-size:.9rem}
+  h1{margin:0 0 10px; font-size:3.1rem; line-height:1.08; letter-spacing:.8px; color:var(--orange);}
+  .sub{max-width:760px; margin:0 auto 26px; font-size:1.02rem; color:#eef1f8}
+  .btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+  .btn{padding:12px 18px; border-radius:12px; border:0; cursor:pointer; font-weight:700; box-shadow:var(--shadow); display:inline-flex; align-items:center; gap:10px}
+  .btn-primary{background:var(--orange); color:#2b1400}
+  .btn-ghost{background:rgba(255,255,255,.9); color:#1a224e}
 
-  /* HERO */
-  .hero{position:relative; min-height:92vh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden; background:#000;}
-  .hero img.bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.92;}
-  /* dunkler Verlauf NUR oben -> nach unten auslaufend */
-  .hero::after{
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(15,1,71,.88) 0%, rgba(15,1,71,.58) 30%, rgba(15,1,71,.28) 55%, rgba(15,1,71,0) 75%);
-    pointer-events:none;
-  }
-  .hero .inner{position:relative; z-index:10; padding:0 24px; max-width:1100px;}
-  .badge{display:inline-block; padding:10px 14px; border-radius:999px; background:rgba(0,0,0,.35); color:#fff; font-size:.9rem; letter-spacing:.3px; backdrop-filter:saturate(140%) blur(2px);}
-  h1{margin:16px 0 12px; font-size:clamp(28px,6vw,56px); line-height:1.1; font-weight:900; letter-spacing:.5px; color:var(--orange); text-shadow:0 2px 12px rgba(0,0,0,.45);}
-  .sub{max-width:900px; margin:12px auto 26px; line-height:1.55; color:#fff; font-weight:600; text-shadow:0 1px 8px rgba(0,0,0,.45);}
+  /* ---------- Sections ---------- */
+  section{padding:60px 0}
+  h2{margin:0 0 18px; color:#fff}
 
-  /* BUTTONS – NIE UNTERSTRICHEN */
-  .cta{display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
-  .btn{
-    appearance:none; border:0; padding:12px 18px; border-radius:12px; cursor:pointer; font-weight:800;
-    filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));
-    text-decoration:none; display:inline-block;
-  }
-  .btn:link,.btn:visited,.btn:hover,.btn:active{ text-decoration:none }
-  .btn-orange{background:var(--orange); color:#fff;}
-  .btn-ghost{background:rgba(255,255,255,.9); color:#111;}
-  .btn:hover{transform:translateY(-1px)} .btn:active{transform:translateY(0)}
+  .cardgrid{display:grid; gap:16px}
+  @media(min-width:880px){ .cardgrid{grid-template-columns:repeat(3,1fr);} }
+  .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow)}
+  .card h3{margin:10px 0 6px; color:#fff}
+  .lead{color:#cfd6ee; font-size:.96rem}
+  .icon{height:44px;width:44px;border-radius:12px;display:grid;place-items:center;background:rgba(248,121,3,.12);border:1px solid rgba(248,121,3,.35);color:var(--orange);font-size:24px}
 
-  /* SECTIONS */
-  .section{padding:64px 20px}
-  .container{max-width:1100px; margin:0 auto}
-  .h2{color:#fff; margin:0 0 18px; font-size:clamp(22px,4.5vw,32px); letter-spacing:.6px}
-
-  /* WHY – mit ICONS */
-  .grid-3{display:grid; gap:18px; grid-template-columns:repeat(3,1fr)}
-  @media (max-width:900px){ .grid-3{grid-template-columns:1fr} }
-  .card{
-    background:radial-gradient(160% 160% at 0% 0%, var(--card) 0%, var(--card2) 100%);
-    padding:22px; border-radius:18px; border:1px solid rgba(255,255,255,.06); box-shadow:0 10px 24px rgba(0,0,0,.22);
-    display:flex; gap:14px; align-items:flex-start;
-  }
-  .icon{
-    width:42px; height:42px; border-radius:12px; flex:0 0 42px;
-    background:rgba(248,121,3,.12); display:grid; place-items:center; color:var(--orange);
-  }
-  .card h3{margin:0 0 6px; color:#fff}
-  .card p{margin:0; color:var(--muted)}
-
-  /* TRAINING */
-  .training{display:grid; gap:18px; grid-template-columns:1.1fr .9fr}
-  @media (max-width:900px){ .training{grid-template-columns:1fr} }
-  .box{background:radial-gradient(160% 160% at 0% 0%, var(--card) 0%, var(--card2) 100%); padding:24px; border-radius:18px; border:1px solid rgba(255,255,255,.06); box-shadow:0 10px 24px rgba(0,0,0,.22);}
-  .box strong{color:#fff}
-  .box .row{margin:.35rem 0}
-
-  /* GALLERY */
-  .gallery{position:relative; overflow:hidden; border-radius:18px; box-shadow:0 10px 24px rgba(0,0,0,.22); border:1px solid rgba(255,255,255,.06)}
-  .slides{display:flex; transition:transform .6s ease-in-out}
-  .slides img{width:100%; height:420px; object-fit:cover; flex:0 0 100%}
-  .nav{position:absolute; inset:auto 0 12px 0; display:flex; justify-content:center; gap:8px; z-index:5}
-  .dot{width:10px;height:10px;border-radius:50%; background:rgba(255,255,255,.5); cursor:pointer}
+  /* ---------- Slider ---------- */
+  .slider{position:relative; border-radius:22px; overflow:hidden; box-shadow:var(--shadow); background:#000; height:52vh}
+  @media(max-width:720px){ .slider{height:62vh;} }
+  .slides{height:100%; display:flex; transition:transform .6s ease}
+  .slide{min-width:100%; height:100%}
+  .slide img{width:100%; height:100%; object-fit:cover}
+  .dots{position:absolute; left:50%; transform:translateX(-50%); bottom:12px; display:flex; gap:8px}
+  .dot{height:10px;width:10px;border-radius:50%; background:rgba(255,255,255,.55); cursor:pointer}
   .dot.active{background:var(--orange)}
-  .arrow{position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,.45); color:#fff; border:0; width:42px; height:42px; border-radius:50%; cursor:pointer}
-  .arrow.left{left:10px} .arrow.right{right:10px}
+  .nav{position:absolute; top:50%; transform:translateY(-50%); height:42px; width:42px; border-radius:50%; display:grid; place-items:center; color:#fff; background:rgba(0,0,0,.35); cursor:pointer; border:1px solid rgba(255,255,255,.35)}
+  .nav.left{left:12px} .nav.right{right:12px}
 
-  /* IG */
-  .ig{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
-      background:radial-gradient(160% 160% at 0% 0%, var(--card) 0%, var(--card2) 100%);
-      border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:24px}
-  .ig-left{display:flex; align-items:center; gap:12px}
-  .ig svg{width:28px; height:28px}
+  /* ---------- Trainingszeit & Map ---------- */
+  .cols{display:grid; gap:18px}
+  @media(min-width:980px){ .cols{grid-template-columns:1.2fr .8fr;} }
+  .callout{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow)}
+  .callout h4{margin:0 0 12px; color:#fff}
+  iframe{width:100%; height:300px; border:0; border-radius:14px}
 
-  footer{padding:30px 20px; text-align:center; color:#98a0ff; font-size:.95rem}
+  /* ---------- Instagram Kachel (ohne API) ---------- */
+  .igwrap{display:grid; gap:16px}
+  .igcards{display:grid; gap:12px; grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){ .igcards{grid-template-columns:1fr 1fr} }
+  @media(max-width:520px){ .igcards{grid-template-columns:1fr} }
+  .ighead{display:flex; align-items:center; justify-content:space-between}
+  .igbadge{display:flex; align-items:center; gap:10px}
+  .igicon{height:32px;width:32px;border-radius:8px;background:#fff;display:grid;place-items:center;color:#E1306C;font-weight:900}
+  .igcard{position:relative; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.12); background:#000}
+  .igcard img{width:100%; height:220px; object-fit:cover; display:block; opacity:.95}
+  .igcard .overlay{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.0),rgba(0,0,0,.3));}
+  .igbtn{padding:10px 14px; border-radius:10px; background:rgba(255,255,255,.9); color:#1a224e; font-weight:700; box-shadow:var(--shadow)}
 
-  /* Scroll to top */
-  #toTop{position:fixed; right:18px; bottom:18px; width:46px; height:46px; border-radius:50%; background:var(--orange); color:#fff; border:0; cursor:pointer; display:none; box-shadow:0 10px 22px rgba(0,0,0,.3); z-index:50; font-size:20px; font-weight:900;}
-  #toTop.show{display:block}
+  /* ---------- Sponsorenleiste ---------- */
+  .sponsors-strip{padding:34px 0; background:rgba(0,0,0,.22); border-top:1px solid rgba(255,255,255,.12); border-bottom:1px solid rgba(255,255,255,.08)}
+  .sponsors{display:flex; gap:32px; justify-content:center; align-items:center; flex-wrap:wrap}
+  .sponsors img{
+    height:44px; width:auto; opacity:.9;
+    /* macht Logos 1-farbig weiß */
+    filter: grayscale(1) brightness(100) invert(1) contrast(1.1);
+    mix-blend-mode: screen;
+  }
+  .sponsors img:hover{opacity:1; transform:translateY(-1px)}
+  .sponsors-title{font-size:.92rem; letter-spacing:.4px; text-transform:uppercase; color:#cbd3ef; text-align:center; margin-bottom:12px}
+
+  /* ---------- Footer & ToTop ---------- */
+  footer{padding:40px 0 60px; text-align:center; color:#cbd3ef}
+  .totop{position:fixed; right:18px; bottom:18px; height:44px; width:44px; border-radius:50%; background:var(--orange); color:#2b1400; display:grid; place-items:center; font-weight:900; box-shadow:var(--shadow); cursor:pointer}
 </style>
 </head>
+
 <body>
 
-  <!-- Logo -->
+  <!-- LOGO -->
   <div class="topbar">
-    <img src="Logo NEU DKF Transparent.png" alt="Deister Kicker Logo">
+    <div class="brand"><img src="Logo NEU DKF Transparent.png" alt="Deister Kicker Logo" /></div>
   </div>
 
   <!-- HERO -->
-  <header class="hero" id="top">
-    <img class="bg" src="Fussball Kids Banner.jpg" alt="Fussballtraining" />
-    <div class="inner">
-      <div class="badge">Training • Technik • Athletik • Talentförderung</div>
-      <h1>DEISTER KICKER<br>FUSSBALLSCHULE</h1>
-      <p class="sub">Moderne, spielnahe Einheiten für motivierte Spielerinnen &amp; Spieler ab 5 Jahren.<br>Fokus: <strong>Spaß am Ball</strong> • <strong>klare Methodik</strong> • <strong>individuelle Entwicklung</strong>.</p>
-      <div class="cta">
-        <a class="btn btn-orange" href="https://wa.me/4917661779069?text=Hallo%20Deister%20Kicker!%20Ich%20m%C3%B6chte%20ein%20Probetraining%20anfragen.">WhatsApp – Probetraining anfragen</a>
-        <a class="btn btn-ghost" href="mailto:deisterkicker@gmail.com?subject=Anfrage%20Probetraining&body=Hallo%20Deister%20Kicker,%0Aich%20habe%20Interesse%20an%20einem%20Probetraining.">E-Mail senden</a>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Training · Technik · Athletik · Talentförderung</div>
+      <h1>DEISTER KICKER<br/>FUSSBALLSCHULE</h1>
+      <p class="sub">
+        Moderne, spielnahe Einheiten für motivierte Spielerinnen & Spieler ab 5&nbsp;Jahren.
+        Fokus: <strong>Spaß am Ball</strong> · <strong>klare Methodik</strong> · <strong>individuelle Entwicklung</strong>.
+      </p>
+      <div class="btns">
+        <a class="btn btn-primary" href="https://wa.me/4917661779069?text=Hallo%20Deister%20Kicker!%20Ich%20m%C3%B6chte%20ein%20Probetraining%20anfragen.">WhatsApp – Probetraining anfragen</a>
+        <a class="btn btn-ghost" href="mailto:deisterkicker@gmail.com?subject=Anfrage%20Probetraining">E-Mail senden</a>
       </div>
     </div>
   </header>
 
-  <!-- WARUM WIR (mit Icons) -->
-  <section class="section">
-    <div class="container">
-      <h2 class="h2">WARUM WIR?</h2>
-      <div class="grid-3">
+  <main>
+    <!-- WARUM WIR -->
+    <section class="container">
+      <h2>WARUM WIR?</h2>
+      <div class="cardgrid">
         <div class="card">
-          <div class="icon">
-            <!-- Target / Progress icon -->
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2a10 10 0 1010 10h2A12 12 0 1112 0v2zm1 1.06V6h2.94A7.98 7.98 0 0120 11h-2a6 6 0 00-5-5V3.06z"/><path d="M11 7h2v6h-2zM7 11h6v2H7z"/></svg>
-          </div>
-          <div>
-            <h3>Individuelle Entwicklung</h3>
-            <p>Gezielte Förderung je nach Leistungsstand. Persönliche Ziele, klare Fortschritte, echtes Feedback.</p>
-          </div>
+          <div class="icon">💪</div>
+          <h3>Individuelle Entwicklung</h3>
+          <p class="lead">Gezielte Förderung je nach Leistungsstand. Persönliche Ziele, klare Fortschritte, echtes Feedback.</p>
         </div>
         <div class="card">
-          <div class="icon">
-            <!-- Ball icon -->
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 2l3 2 1 3-2 3h-4L8 7l1-3 3-2zm-7 8l3-1 2 3-1 4-3 1a8 8 0 01-1-7zm14 7l-3-1-1-4 2-3 3 1a8 8 0 01-1 7z"/></svg>
-          </div>
-          <div>
-            <h3>Spielnah & modern</h3>
-            <p>Methodik auf neuestem Stand: viel Ballkontakt, Spielformen, smarte Technik-Drills.</p>
-          </div>
+          <div class="icon">⚽</div>
+          <h3>Spielnah & modern</h3>
+          <p class="lead">Methodik auf neuestem Stand: viel Ballkontakt, Spielformen, smarte Technik-Drills.</p>
         </div>
         <div class="card">
-          <div class="icon">
-            <!-- Users icon -->
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16 11a4 4 0 10-8 0 4 4 0 008 0zM2 20a6 6 0 0112 0v2H2v-2zm14 0a6.5 6.5 0 015.5-3.2H22V22h-6v-2z"/></svg>
-          </div>
-          <div>
-            <h3>Familiäre Trainer-Atmosphäre</h3>
-            <p>Leidenschaftlich, nahbar, respektvoll. Vertrauen &amp; Spaß sind die Grundlage für Leistung.</p>
-          </div>
+          <div class="icon">🤝</div>
+          <h3>Familiäre Trainer-Atmosphäre</h3>
+          <p class="lead">Leidenschaftlich, nahbar, respektvoll. Vertrauen & Spaß sind die Grundlage für Leistung.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- GALERIE -->
-  <section class="section">
-    <div class="container">
-      <h2 class="h2">EINDRÜCKE AUS DEM TRAINING</h2>
-      <div class="gallery">
-        <button class="arrow left" aria-label="Zurück" id="prev">&#8249;</button>
-        <div class="slides" id="slides">
-          <img src="gallery-1.jpg" alt="Training 1">
-          <img src="gallery-2.jpg" alt="Training 2">
-          <img src="gallery-3.jpg" alt="Training 3">
-          <img src="gallery-4.jpg" alt="Training 4">
-          <img src="gallery-5.jpg" alt="Training 5">
-          <img src="gallery-6.jpg" alt="Training 6">
+    <!-- GALERIE -->
+    <section class="container">
+      <h2>EINDRÜCKE AUS DEM TRAINING</h2>
+      <div class="slider" id="slider">
+        <div class="slides">
+          <div class="slide"><img src="gallery-1.jpg" alt=""></div>
+          <div class="slide"><img src="gallery-2.jpg" alt=""></div>
+          <div class="slide"><img src="gallery-3.jpg" alt=""></div>
+          <div class="slide"><img src="gallery-4.jpg" alt=""></div>
+          <div class="slide"><img src="gallery-5.jpg" alt=""></div>
+          <div class="slide"><img src="gallery-6.jpg" alt=""></div>
         </div>
-        <button class="arrow right" aria-label="Weiter" id="next">&#8250;</button>
-        <div class="nav" id="dots"></div>
+        <div class="nav left"  id="prev">‹</div>
+        <div class="nav right" id="next">›</div>
+        <div class="dots" id="dots"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- TRAINING & STANDORT -->
-  <section class="section">
-    <div class="container">
-      <h2 class="h2">TRAININGSZEIT & STANDORT</h2>
-      <div class="training">
-        <div class="box">
-          <div class="row"><strong>TSV Hamelspringe • Sportplatz</strong></div>
-          <div class="row"><strong>Montag:</strong> 16:45 – 18:15 Uhr (Beginn 16:45)</div>
-          <div class="row"><strong>Adresse:</strong> Kösterbrink 2, 31848 Bad Münder am Deister</div>
-          <div class="row" style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap">
-            <a class="btn btn-orange" href="https://wa.me/4917661779069?text=Hallo%20Deister%20Kicker!%20Ich%20m%C3%B6chte%20ein%20Probetraining%20anfragen.">WhatsApp schreiben</a>
-            <a class="btn btn-ghost" href="mailto:deisterkicker@gmail.com?subject=Anfrage%20Probetraining&body=Hallo%20Deister%20Kicker,%0Aich%20habe%20Interesse%20an%20einem%20Probetraining.">Mail senden</a>
+    <!-- TRAININGSZEIT & STANDORT -->
+    <section class="container">
+      <h2>TRAININGSZEIT & STANDORT</h2>
+      <div class="cols">
+        <div class="callout">
+          <h4>TSV Hamelspringe · Sportplatz</h4>
+          <p><strong>Montag:</strong> 16:45 – 18:15 Uhr (Beginn 16:45)</p>
+          <p><strong>Adresse:</strong> Kösterbrink 2, 31848 Bad Münder am Deister</p>
+          <p class="lead">Fragen? Einfach per WhatsApp oder E-Mail melden.</p>
+          <div class="btns" style="justify-content:flex-start">
+            <a class="btn btn-primary" href="https://wa.me/4917661779069?text=Hallo%20Deister%20Kicker!%20Ich%20habe%20eine%20Frage.">WhatsApp schreiben</a>
+            <a class="btn btn-ghost" href="mailto:deisterkicker@gmail.com?subject=Frage%20zur%20Fussballschule">Mail senden</a>
           </div>
         </div>
-        <div class="box">
-          <iframe title="Karte"
-            src="https://www.google.com/maps?q=K%C3%B6sterbrink%202,%2031848%20Bad%20M%C3%BCnder%20am%20Deister&output=embed"
-            width="100%" height="320" style="border:0; border-radius:12px" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="callout">
+          <iframe src="https://www.google.com/maps?q=K%C3%B6sterbrink%202,%2031848%20Bad%20M%C3%BCnder%20am%20Deister&output=embed" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- INSTAGRAM -->
-  <section class="section">
-    <div class="container">
-      <div class="ig">
-        <div class="ig-left">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm10 2H7a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm-5 3a6 6 0 110 12 6 6 0 010-12zm0 2.2a3.8 3.8 0 100 7.6 3.8 3.8 0 000-7.6zM18 6.6a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/></svg>
-          <div><strong>Folge uns auf Instagram</strong><br><span style="opacity:.8">@deister_kicker</span></div>
+    <!-- INSTAGRAM (ohne API – 3 Thumbnails als Platzhalter) -->
+    <section class="container">
+      <div class="igwrap">
+        <div class="ighead">
+          <div class="igbadge">
+            <div class="igicon">IG</div>
+            <div>
+              <div style="font-weight:700;color:#fff">Folge uns auf Instagram</div>
+              <div>@deister_kicker</div>
+            </div>
+          </div>
+          <a class="igbtn" href="https://www.instagram.com/deister_kicker" target="_blank" rel="noopener">Profil ansehen</a>
         </div>
-        <a class="btn btn-ghost" href="https://www.instagram.com/deister_kicker" target="_blank" rel="noopener">Instagram ansehen</a>
+
+        <div class="igcards">
+          <!-- Ersetze die href-Links mit deinen Post-URLs -->
+          <a class="igcard" href="https://www.instagram.com/deister_kicker/" target="_blank" rel="noopener">
+            <img src="ig-1.jpg" alt="Instagram 1"><span class="overlay"></span>
+          </a>
+          <a class="igcard" href="https://www.instagram.com/deister_kicker/" target="_blank" rel="noopener">
+            <img src="ig-2.jpg" alt="Instagram 2"><span class="overlay"></span>
+          </a>
+          <a class="igcard" href="https://www.instagram.com/deister_kicker/" target="_blank" rel="noopener">
+            <img src="ig-3.jpg" alt="Instagram 3"><span class="overlay"></span>
+          </a>
+        </div>
+
+        <!-- Alternative: Wenn du später ein Widget einbindest, kannst du HIER ein iframe vom Anbieter einfügen -->
+        <!-- <div style="border-radius:14px; overflow:hidden"><iframe src="WIDGET_URL" width="100%" height="420" style="border:0;"></iframe></div> -->
+      </div>
+    </section>
+
+    <!-- SPONSORENLEISTE (mono-weiß) -->
+    <div class="sponsors-strip">
+      <div class="container">
+        <div class="sponsors-title">Unterstützt unsere Fussballschule</div>
+        <div class="sponsors">
+          <!-- Lade sponsor-1.png, sponsor-2.png in dein Repo -->
+          <img src="sponsor-1.png" alt="Sponsor 1">
+          <img src="sponsor-2.png" alt="Sponsor 2">
+          <!-- Weitere Logos? einfach weitere <img> ergänzen -->
+        </div>
       </div>
     </div>
-  </section>
+  </main>
 
   <footer>© Deister Kicker Fussballschule · 2025</footer>
 
-  <!-- Scroll-to-Top -->
-  <button id="toTop" aria-label="Nach oben">↑</button>
+  <a class="totop" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
 
-  <!-- JS: Slider + ScrollToTop -->
+  <!-- Slider Script -->
   <script>
-    // Scroll-to-top
-    const toTop = document.getElementById('toTop');
-    window.addEventListener('scroll', () => { if (window.scrollY > 400) toTop.classList.add('show'); else toTop.classList.remove('show'); });
-    toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    (function(){
+      const el = document.querySelector('#slider');
+      const track = el.querySelector('.slides');
+      const slides = [...el.querySelectorAll('.slide')];
+      const prev = el.querySelector('#prev');
+      const next = el.querySelector('#next');
+      const dotsWrap = el.querySelector('#dots');
+      let i = 0, t;
 
-    // Slider
-    const slides = document.getElementById('slides');
-    const images = Array.from(slides.querySelectorAll('img'));
-    const dotsWrap = document.getElementById('dots');
-    let idx = 0, timer;
-
-    function buildDots(){
-      dotsWrap.innerHTML = '';
-      images.forEach((_,i)=>{
-        const d = document.createElement('div');
-        d.className = 'dot' + (i===0?' active':'');
-        d.addEventListener('click', ()=>go(i));
+      slides.forEach((_,idx)=>{
+        const d=document.createElement('div');
+        d.className='dot'+(idx===0?' active':'');
+        d.addEventListener('click',()=>go(idx));
         dotsWrap.appendChild(d);
       });
-    }
-    function go(i){
-      idx = (i+images.length)%images.length;
-      slides.style.transform = `translateX(-${idx*100}%)`;
-      [...dotsWrap.children].forEach((c,j)=>c.classList.toggle('active', j===idx));
+      const dots=[...dotsWrap.children];
+
+      function go(idx){
+        i = (idx+slides.length)%slides.length;
+        track.style.transform = `translateX(${-i*100}%)`;
+        dots.forEach((d,j)=>d.classList.toggle('active', j===i));
+        restart();
+      }
+      function step(){ go(i+1); }
+      function restart(){ clearInterval(t); t=setInterval(step, 3500); }
+
+      prev.addEventListener('click', ()=>go(i-1));
+      next.addEventListener('click', ()=>go(i+1));
       restart();
-    }
-    function next(){ go(idx+1) }
-    function prev(){ go(idx-1) }
-    function restart(){ clearInterval(timer); timer = setInterval(next, 4500) }
-    document.getElementById('next').addEventListener('click', next);
-    document.getElementById('prev').addEventListener('click', prev);
-    buildDots(); go(0);
+    })();
   </script>
 </body>
 </html>
