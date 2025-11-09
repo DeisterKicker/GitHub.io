@@ -1,126 +1,123 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Deister Kicker Fussballschule</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Deister Kicker Fussballschule</title>
 
-  <style>
-    :root{
-      --blue:#0F0147;
-      --blue-dark:#0a0138;
-      --orange:#F87903;
-      --white:#ffffff;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;height:100%}
-    body{font-family:Arial,Helvetica,sans-serif;color:var(--white);background:var(--blue-dark)}
+<style>
+:root{
+  --blue:#0F0147;
+  --blue-dark:#09002c;
+  --orange:#F87903;
+  --white:#ffffff;
+}
 
-    /* --- Top-Bar mit Logo --- */
-    .topbar{
-      position:absolute; inset:0 0 auto 0; height:72px;
-      display:flex; align-items:center; gap:14px; padding:10px 18px; z-index:5;
-    }
-    .topbar img{height:52px; width:auto; display:block; filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
-    .topbar .brand{font-weight:800; letter-spacing:.3px}
+/* Grundlayout */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--blue-dark);color:var(--white);}
 
-    /* --- HERO --- */
-    .hero{
-      position:relative; min-height:86vh; width:100%;
-      display:flex; align-items:center; justify-content:center; text-align:left;
-      background:#000;
-      overflow:hidden;
-    }
-    .hero::before{
-      content:""; position:absolute; inset:0;
-      background:url('hero.jpg') center/cover no-repeat fixed;
-      filter:brightness(.78);
-      transform:scale(1.02);
-    }
-    /* dunkles Verlaufs-Overlay + leichter Bodenverlauf */
-    .hero::after{
-      content:""; position:absolute; inset:0;
-      background:
-        linear-gradient(180deg, rgba(15,1,71,.15) 0%, rgba(15,1,71,.55) 55%, rgba(15,1,71,.85) 100%),
-        linear-gradient(0deg, rgba(0,0,0,.25), rgba(0,0,0,.25));
-      pointer-events:none;
-    }
+/* Hero-Bereich */
+.hero{
+  position:relative;
+  width:100%;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:url('Fussball Kids Banner.jpg') center/cover no-repeat fixed;
+  filter:brightness(0.92);
+}
 
-    .hero-inner{
-      position:relative; z-index:2; max-width:1100px; width:100%;
-      padding:100px 22px 40px;
-      display:grid; grid-template-columns:1fr; gap:16px;
-    }
+/* Abdunkelung */
+.hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background:rgba(0,0,0,0.45);
+}
 
-    .kicker{
-      font-size:clamp(1.8rem, 4.5vw, 3.2rem);
-      font-weight:900; line-height:1.05; margin:0;
-      text-shadow:0 6px 24px rgba(0,0,0,.55);
-    }
-    .kicker .accent{color:var(--orange)}
-    .sub{
-      margin:.6rem 0 0; font-size:clamp(1.05rem, 2.2vw, 1.25rem); opacity:.95;
-      text-shadow:0 4px 16px rgba(0,0,0,.55);
-      max-width:780px;
-    }
+/* Inhalt im Hero */
+.hero-container{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-shadow:0 3px 8px rgba(0,0,0,0.5);
+}
 
-    .ctas{margin-top:18px; display:flex; gap:12px; flex-wrap:wrap}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:14px 20px; border-radius:10px; text-decoration:none;
-      font-weight:800; font-size:1.02rem; transition:.18s; border:2px solid transparent;
-      box-shadow:0 8px 24px rgba(0,0,0,.25);
-    }
-    .btn-primary{ background:var(--orange); color:#111 }
-    .btn-primary:hover{ filter:brightness(.95); transform:translateY(-1px) }
-    .btn-outline{ background:transparent; color:var(--white); border-color:rgba(255,255,255,.9) }
-    .btn-outline:hover{ background:rgba(255,255,255,.08); transform:translateY(-1px) }
+/* Logo */
+.hero-logo{
+  height:160px;
+  margin-bottom:20px;
+}
 
-    /* --- Abschnitt unten (hell) --- */
-    .info{
-      background:linear-gradient(180deg, var(--blue-dark), var(--blue));
-      padding:40px 18px; text-align:center;
-    }
-    .info p{max-width:900px; margin:0 auto; line-height:1.7}
+/* Überschrift */
+.hero h1{
+  font-size:3rem;
+  font-weight:800;
+  letter-spacing:1px;
+  margin-bottom:10px;
+}
 
-    footer{color:rgba(255,255,255,.75); text-align:center; padding:26px 12px; font-size:.9rem}
-    @media (max-width: 520px){ .topbar{height:64px} .topbar img{height:46px} }
-  </style>
+.hero p{
+  font-size:1.3rem;
+  max-width:700px;
+  margin:auto;
+  opacity:0.9;
+}
+
+/* Buttons */
+.buttons{margin-top:28px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+
+.btn{
+  padding:14px 22px;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:600;
+  font-size:1rem;
+  transition:0.3s;
+}
+
+.btn-orange{background:var(--orange);color:var(--white);}
+.btn-orange:hover{background:#d26602;}
+
+.btn-light{background:var(--white);color:var(--blue-dark);}
+.btn-light:hover{background:#ddd;}
+
+/* Footer */
+footer{
+  text-align:center;
+  color:#bbb;
+  font-size:0.85rem;
+  margin:40px 0;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- LOGO oben links -->
-  <div class="topbar">
-    <img src="logo-dkf.png" alt="Deister Kicker Logo" />
-    <div class="brand">Deister Kicker Fussballschule</div>
-  </div>
+<section class="hero">
+  <div class="hero-container">
 
-  <!-- HERO mit Foto & Overlay-Text -->
-  <section class="hero">
-    <div class="hero-inner">
-      <h1 class="kicker">
-        Willkommen bei den <span class="accent">Deister Kickern</span><br/>
-        Deine <span class="accent">Fussballschule</span> im Deister
-      </h1>
-      <p class="sub">
-        Moderne, spielnahe Einheiten für motivierte Spielerinnen &amp; Spieler ab 5 Jahren.
-        Fokus: <strong>Spaß am Ball</strong> · <strong>klare Methodik</strong> · <strong>individuelle Entwicklung</strong>.
-      </p>
+    <img src="logo-dkf.png" alt="Deister Kicker Logo" class="hero-logo" />
 
-      <div class="ctas">
-        <a class="btn btn-primary"
-           href="https://wa.me/4917661779069?text=Hallo%2C%20ich%20interessiere%20mich%20für%20ein%20Probetraining%20bei%20den%20Deister%20Kickern."
-           target="_blank" rel="noopener">WhatsApp – Probetraining anfragen</a>
-        <a class="btn btn-outline" href="mailto:info@deister-kicker.de">E-Mail senden</a>
-      </div>
+    <h1>Deister Kicker Fussballschule</h1>
+    <p>
+      Moderne, spielnahe Einheiten für motivierte Spielerinnen & Spieler ab 5 Jahren.<br>
+      Fokus: Spaß am Ball · klare Methodik · individuelle Entwicklung.
+    </p>
+
+    <div class="buttons">
+      <a href="https://wa.me/4917661779069" class="btn btn-orange">WhatsApp – Probetraining anfragen</a>
+      <a href="mailto:deisterkicker@gmail.com" class="btn btn-light">E-Mail senden</a>
     </div>
-  </section>
 
-  <!-- Heller Info-Block (optional) -->
-  <section class="info">
-    <p><strong>Standort:</strong> Deister / Bad Münder – Region Hannover · Training · Technik · Athletik · Talentförderung</p>
-  </section>
+  </div>
+</section>
 
-  <footer>© Deister Kicker Fussballschule · 2025</footer>
+<footer>© Deister Kicker Fussballschule • 2025</footer>
+
 </body>
 </html>
