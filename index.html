@@ -6,18 +6,19 @@
 <title>Deister Kicker Fussballschule</title>
 <style>
   :root{
-    --blue:#0F0147;
-    --blue-900:#0B0033;
+    --blue-top:#0A0F3A;          /* dunkles Blau oben */
+    --blue-mid:#102060;          /* Übergang */
+    --blue-clear:transparent;    /* unten klar */
     --orange:#F87903;
     --white:#fff;
     --text:#e9eef6;
     --muted:#b9c3d8;
     --shadow:0 10px 30px rgba(0,0,0,.35);
     --r:16px;
-    --logo-size:140px; /* <- Logo-Größe hier ändern */
+    --logo-size:140px;           /* <- Logo-Größe hier ändern */
   }
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--blue-900),#0a183c);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+  html,body{margin:0;padding:0;background:linear-gradient(180deg,#0b0033,#0a183c);color:var(--text);font-family:Arial,Helvetica,sans-serif}
 
   /* Logo oben rechts */
   .top-logo{
@@ -28,26 +29,38 @@
 
   /* HERO */
   .hero{position:relative; min-height:90svh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden; background:#000}
-  .hero img.bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center center; transform:translateZ(0)}
-  /* Top→Bottom Verlauf wie gehabt */
+  .hero img.bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center center}
+
+  /* Neuer: klarer, blauer Verlauf von oben nach unten – unten bleibt das Foto frei */
   .hero::before{
     content:""; position:absolute; inset:0; pointer-events:none;
-    background:linear-gradient(180deg, rgba(15,1,71,.78) 0%, rgba(15,1,71,.55) 35%, rgba(15,1,71,.22) 62%, rgba(15,1,71,0) 100%);
+    background:linear-gradient(180deg,
+      rgba(10,15,58,.92) 0%,
+      rgba(16,32,96,.75) 35%,
+      rgba(16,32,96,.38) 60%,
+      rgba(16,32,96,0) 78%,
+      rgba(16,32,96,0) 100%);
   }
-  /* Zusätzliche Vignette hinter der Textzone für bessere Lesbarkeit */
-  .hero::after{
-    content:""; position:absolute; inset:0; pointer-events:none;
-    background:radial-gradient(60% 38% at 50% 38%, rgba(8,12,34,.58) 0%, rgba(8,12,34,.36) 55%, rgba(8,12,34,0) 75%);
-  }
+
   .hero .inner{position:relative; z-index:1; padding:0 20px; max-width:1100px}
+
   /* Kicker-Tags mit vertikalen Strichen */
   .k-tags{display:inline-flex; gap:10px; align-items:center; padding:8px 14px; border-radius:999px;
     background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); backdrop-filter:blur(4px);
     font-size:14px; letter-spacing:.02em}
   .k-tags .sep{width:1px; height:14px; background:rgba(255,255,255,.55); display:inline-block}
-  h1.hero-title{margin:.2em 0 .35em; line-height:1.08; font-weight:900; letter-spacing:.06em;
-    color:var(--orange); text-shadow:0 6px 18px rgba(0,0,0,.5); font-size:clamp(28px,5vw,56px)}
-  .sub{max-width:900px; margin:0 auto 18px; color:var(--text); opacity:.98; text-shadow:0 3px 12px rgba(0,0,0,.55)}
+
+  /* Deutlich bessere Lesbarkeit des Titels */
+  h1.hero-title{
+    margin:.25em 0 .4em; line-height:1.08; font-weight:900; letter-spacing:.06em;
+    color:var(--orange); font-size:clamp(28px,5vw,56px);
+    text-shadow:
+      0 2px 0 rgba(0,0,0,.65),
+      0 4px 10px rgba(0,0,0,.55),
+      0 10px 24px rgba(0,0,0,.45);
+  }
+  .sub{max-width:900px; margin:0 auto 18px; color:var(--text); opacity:.98;
+    text-shadow:0 2px 8px rgba(0,0,0,.55)}
 
   /* Buttons */
   .btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
