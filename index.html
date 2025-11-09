@@ -2,91 +2,97 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Deister Kicker Fußballschule</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deister Kicker Fussballschule</title>
+
+  <!-- Farben: Blau #0F0147 | Orange #F87903 -->
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #111;
-      text-align: center;
+    :root{
+      --blue:#0F0147;
+      --blue-dark:#0d013b;     /* leicht dunkler fürs Gradient/Hover */
+      --orange:#F87903;
+      --bg:#f6f7f9;
+      --text:#0f1520;
     }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
 
-    header {
-      background: #0b6623; /* dunkles Fußballfeld-Grün */
-      color: white;
-      padding: 40px 20px;
+    /* Header mit dunkelblauem Balken + Logo + Claim */
+    header{
+      background:var(--blue);
+      color:#fff;
+      padding:14px 18px;
+      display:flex;align-items:center;gap:16px;justify-content:center;text-align:left;
     }
+    .brand{display:flex;align-items:center;gap:16px;max-width:1100px;width:100%}
+    .brand img{height:72px;width:auto;display:block}
+    .title h1{margin:0;font-size:1.6rem;font-weight:800;letter-spacing:.5px}
+    .title p{margin:3px 0 0;opacity:.9}
 
-    header h1 {
-      margin: 0;
-      font-size: 2.6rem;
-      letter-spacing: 1px;
-      font-weight: 800;
+    /* Hero (dunkelblau → etwas dunkler) */
+    .hero{
+      background:linear-gradient(180deg,var(--blue),var(--blue-dark));
+      color:#fff;text-align:center;padding:44px 18px;
     }
+    .hero p{margin:10px auto 0;max-width:900px;font-size:1.12rem;line-height:1.6}
 
-    header p {
-      font-size: 1.2rem;
-      margin-top: 8px;
-      opacity: 0.9;
-    }
+    /* Content-Bereich */
+    .content{max-width:900px;margin:40px auto;padding:0 18px;text-align:center;font-size:1.1rem;line-height:1.7}
 
-    .content {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-      font-size: 1.2rem;
-      line-height: 1.7;
-    }
+    /* Buttons */
+    .cta-row{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;
+         text-decoration:none;font-weight:800;font-size:1.05rem;transition:.2s}
+    .btn-primary{background:var(--orange);color:#111}
+    .btn-primary:hover{filter:brightness(.95)}
+    .btn-outline{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+    .btn-outline:hover{background:#eef1ff}
 
-    .cta {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 14px 28px;
-      background: #0b6623;
-      color: white;
-      font-size: 1.2rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .cta:hover {
-      background: #0a4f1c;
-    }
+    /* Platzhalter-Foto-Sektion (für Step 2) */
+    .photo{max-width:1100px;margin:28px auto 0;padding:0 18px}
+    .photo img{width:100%;height:auto;border-radius:12px;display:block}
 
-    footer {
-      margin-top: 60px;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #666;
-    }
+    footer{margin:50px 0 24px;color:#667089;font-size:.9rem;text-align:center}
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Deister Kicker Fußballschule</h1>
-  <p>Training. Technik. Athletik. Talentförderung.</p>
-</header>
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <img src="logo-dkf.png" alt="Deister Kicker Fussballschule Logo">
+      <div class="title">
+        <h1>Deister Kicker Fussballschule</h1>
+        <p>Training · Technik · Athletik · Talentförderung</p>
+      </div>
+    </div>
+  </header>
 
-<div class="content">
-  <p>
-    Unsere Trainingsangebote richten sich an motivierte Spielerinnen und Spieler ab 5 Jahren.  
-    Wir arbeiten modern, spielnah und mit einem klaren Konzept:  
-    **Spaß am Ball + individuelle Entwicklung + professionelle Trainingsqualität.**
-  </p>
+  <!-- Hero -->
+  <section class="hero">
+    <p>Moderne, spielnahe Einheiten für motivierte Spielerinnen & Spieler ab 5 Jahren.
+       Fokus: <strong>Spaß am Ball · klare Methodik · individuelle Entwicklung</strong>.</p>
+  </section>
 
-  <p><strong>Standort:</strong> Deister / Bad Münder · Region Hannover</p>
+  <!-- Optional: Startfoto (wir bauen das im nächsten Schritt) -->
+  <!--
+  <div class="photo">
+    <img src="hero.jpg" alt="Training der Deister Kicker">
+  </div>
+  -->
 
-  <a class="cta" href="mailto:info@deister-kicker.de">
-    Jetzt Kontakt aufnehmen
-  </a>
-</div>
+  <!-- Content + CTAs -->
+  <main class="content">
+    <div class="cta-row">
+      <!-- WhatsApp: deine Nummer ist gesetzt -->
+      <a class="btn btn-primary"
+         href="https://wa.me/4917661779069?text=Hallo%2C%20ich%20interessiere%20mich%20für%20ein%20Probetraining%20bei%20den%20Deister%20Kickern."
+         target="_blank" rel="noopener">WhatsApp – Jetzt Probetraining anfragen</a>
 
-<footer>
-  © Deister Kicker Fußballschule – 2025
-</footer>
+      <a class="btn btn-outline" href="mailto:info@deister-kicker.de">E-Mail senden</a>
+    </div>
+  </main>
 
+  <footer>© Deister Kicker Fussballschule – 2025</footer>
 </body>
 </html>
