@@ -3,141 +3,158 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Deister Kicker Fussballschule</title>
+<title>DEISTER KICKER FUSSBALLSCHULE</title>
 
 <style>
 :root{
-  --blue:#0F0147;
-  --blue-dark:#08012f;
-  --orange:#F87903;
-  --white:#ffffff;
+    --blue:#0F0147;
+    --blue-dark:#0a0138;
+    --orange:#F87903;
+    --white:#ffffff;
 }
 
+/* Grundlayout */
 html,body{
-  margin:0;
-  padding:0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--blue-dark);
-  color: var(--white);
-  height:100%;
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--blue-dark);
+    color:var(--white);
+    height:100%;
 }
 
-/* ---------- HEADER MIT LOGO RECHTS ---------- */
+/* TOPBAR mit Logo rechts */
 .topbar{
-  position: absolute;
-  top:20px;
-  right:40px;
-  z-index:10;
+    position:absolute;
+    top:20px;
+    right:40px;
+    z-index:10;
 }
 
 .topbar img{
-  height:90px;
-  width:auto;
-  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.55));
+    height:130px; /* ← Logo jetzt größer */
+    width:auto;
 }
 
-/* ---------- HERO SECTION ---------- */
+/* HERO Bildbereich */
 .hero{
-  position: relative;
-  width:100%;
-  height:100vh;
-  background: url("Fussball Kids Banner.jpg") center/cover no-repeat;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding: 0 20px;
+    position:relative;
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
 }
 
-/* DARK BLUE OVERLAY */
+.hero img.bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:blur(1px);
+}
+
+/* Hellerer Verlauf */
 .hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: rgba(15,1,71,0.55); /* Dunkelblau halbtransparent */
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(rgba(15,1,71,0.40), rgba(15,1,71,0.40)); /* heller gemacht */
 }
 
-/* TEXT IN HERO */
-.hero-content{
-  position:relative;
-  z-index:2;
-  max-width:800px;
+/* Inhalt im Hero */
+.hero .inner{
+    position:relative;
+    max-width:900px;
+    padding:0 20px;
 }
 
+/* TITEL komplett groß */
 .hero h1{
-  font-size: 2.8rem;
-  font-weight:800;
-  margin-bottom:10px;
+    font-size:2.8rem;
+    font-weight:800;
+    text-transform:uppercase; /* ← Hier Großschreibung */
+    margin-bottom:12px;
 }
 
+/* Untertitel */
 .hero p{
-  font-size:1.2rem;
-  line-height:1.5;
-  margin-bottom:30px;
+    font-size:1.15rem;
+    line-height:1.5;
+    opacity:0.95;
+    margin-bottom:28px;
 }
 
-/* ---------- BUTTONS ---------- */
-.buttons{
-  display:flex;
-  justify-content:center;
-  gap:14px;
+/* Buttons */
+.btns{
+    display:flex;
+    gap:14px;
+    justify-content:center;
 }
 
 .btn-orange{
-  background: var(--orange);
-  color: var(--white);
-  font-size:1rem;
-  padding:14px 26px;
-  border-radius:6px;
-  text-decoration:none;
-  font-weight:600;
-  transition:0.3s;
+    background:var(--orange);
+    padding:12px 22px;
+    border:none;
+    border-radius:6px;
+    font-weight:bold;
+    cursor:pointer;
+    color:var(--white);
+    text-decoration:none;
 }
-.btn-orange:hover{ filter:brightness(1.1); }
 
 .btn-white{
-  background: var(--white);
-  color: var(--blue-dark);
-  font-size:1rem;
-  padding:14px 26px;
-  border-radius:6px;
-  text-decoration:none;
-  font-weight:600;
-  transition:0.3s;
+    background:var(--white);
+    padding:12px 22px;
+    border-radius:6px;
+    color:var(--blue-dark);
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
 }
-.btn-white:hover{ filter:brightness(0.9); }
 
-/* ---------- FOOTER ---------- */
+/* Footer */
 footer{
-  text-align:center;
-  padding:30px;
-  font-size:0.9rem;
-  opacity:0.7;
+    text-align:center;
+    padding:22px 0;
+    font-size:0.95rem;
+    opacity:0.85;
 }
 </style>
-
 </head>
+
 <body>
 
+<!-- Logo oben rechts -->
 <div class="topbar">
-  <img src="Logo NEU DKF Transparent.png" alt="Deister Kicker Logo">
+    <img src="Logo%20NEU%20DKF%20Transparent.png" alt="Logo">
 </div>
 
-<section class="hero">
-  <div class="hero-content">
-    <h1>Deister Kicker Fussballschule</h1>
-    <p>Moderne, spielnahe Einheiten für motivierte Spielerinnen & Spieler ab 5 Jahren.<br>
-    Fokus: Spaß am Ball • klare Methodik • individuelle Entwicklung.</p>
+<!-- HERO Bereich -->
+<div class="hero">
+    <img src="Fussball Kids Banner.jpg" class="bg" alt="Hintergrund">
+    
+    <div class="inner">
+        <h1>Deister Kicker Fussballschule</h1>
 
-    <div class="buttons">
-      <a class="btn-orange" href="https://wa.me/4917661779069" target="_blank">WhatsApp – Probetraining anfragen</a>
-      <a class="btn-white" href="mailto:info@deister-kicker.de">E-Mail senden</a>
+        <p>
+        Moderne, spielnahe Einheiten für motivierte Spielerinnen & Spieler ab 5 Jahren.<br>
+        Fokus: Spaß am Ball • klare Methodik • individuelle Entwicklung.
+        </p>
+
+        <div class="btns">
+            <a class="btn-orange" href="https://wa.me/4917661779069" target="_blank">WhatsApp – Probetraining anfragen</a>
+            <a class="btn-white" href="mailto:deisterkicker@gmail.com">E-Mail senden</a>
+        </div>
     </div>
-  </div>
-</section>
+</div>
 
+<!-- Footer -->
 <footer>
-  © Deister Kicker Fussballschule · 2025
+© Deister Kicker Fussballschule · 2025
 </footer>
 
 </body>
