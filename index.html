@@ -3,23 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Deister Kicker Fussballschule</title>
+  <title>DEISTER KICKER FUSSBALLSCHULE</title>
 
   <style>
     :root{
-      --blue:#0F0147;         /* Dunkelblau */
-      --orange:#F87903;       /* Orange */
+      --blue:#0F0147;
+      --blue-80: rgba(15,1,71,.80);
+      --blue-55: rgba(15,1,71,.55);
+      --blue-30: rgba(15,1,71,.30);
+      --blue-10: rgba(15,1,71,.10);
+      --orange:#F87903;
       --white:#ffffff;
-      --bg:#0b0f2a;
       --text:#f2f3f7;
+      --bg:#081537;
+      --card:#0e1c4a;
+      --muted:#bfc7dd;
     }
 
     *{box-sizing:border-box}
     html,body{margin:0}
-
     body{
       font-family: Arial, Helvetica, sans-serif;
-      color:var(--text);
+      color: var(--text);
       background: radial-gradient(1200px 600px at 50% 0%, #16204a 0, #0b0f2a 60%, #0a0d22 100%);
       line-height:1.45;
     }
@@ -33,218 +38,434 @@
       justify-content:center;
       text-align:center;
       overflow:hidden;
-      isolation:isolate; /* damit Overlay über Bild, unter Inhalt liegt */
+      isolation:isolate;
     }
 
-    .hero__bg{
-      position:absolute; inset:0;
-      background: url("Fussball Kids Banner.jpg") center/cover no-repeat;
-      z-index:-2;
-      transform:translateZ(0);
-    }
-
-    /* Blaues Verlauf-Overlay: oben dunkler -> nach unten klar */
+    /* Hintergrundbild + blauer Verlauf von oben nach unten */
     .hero::before{
       content:"";
       position:absolute; inset:0;
       background:
-        linear-gradient(
-          to bottom,
-          rgba(15,1,71,0.72) 0%,
-          rgba(15,1,71,0.48) 30%,
-          rgba(15,1,71,0.22) 55%,
-          rgba(15,1,71,0.06) 70%,
-          rgba(15,1,71,0.00) 82%
-        );
+        linear-gradient(to bottom,
+          rgba(15,1,71,.70) 0%,
+          rgba(15,1,71,.50) 35%,
+          rgba(15,1,71,.15) 65%,
+          rgba(15,1,71,0) 100%),
+        url("Fussball%20Kids%20Banner.jpg") center/cover no-repeat;
+      z-index:-2;
+    }
+    /* leichte Vignette für mehr Kontrast */
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(1000px 400px at 50% 10%, transparent 0 70%, rgba(0,0,0,.18) 100%);
       z-index:-1;
       pointer-events:none;
     }
 
-    /* Logo oben rechts – ohne Rahmen, größer */
-    .top-right-logo{
-      position:absolute; top:22px; right:24px;
-      width:140px; height:auto; /* bei Bedarf auf 150px erhöhen */
-      filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
+    /* Logo oben rechts – freistehend, ohne Rahmen */
+    .brand-right{
+      position:absolute;
+      right:24px; top:18px;
+      width:140px; /* wenn du 130 willst -> 130px */
+      filter:drop-shadow(0 6px 16px rgba(0,0,0,.45));
       user-select:none;
     }
 
-    /* Mini-Tagline mit senkrechten Trennstrichen */
-    .tags{
+    /* Mini-Tagleiste (mit Strichen) */
+    .tagline{
       display:inline-flex; gap:14px;
-      padding:6px 14px;
+      align-items:center;
+      background: rgba(0,0,0,.28);
+      padding:6px 12px;
       border-radius:999px;
-      background:rgba(255,255,255,.08);
-      backdrop-filter:saturate(1.2) blur(2px);
       font-size:.85rem;
       letter-spacing:.2px;
+      margin-bottom:16px;
+      backdrop-filter: blur(2px);
     }
-    .tags .sep{
-      width:2px; height:14px; align-self:center;
-      background:rgba(255,255,255,.65);
-      border-radius:1px;
-    }
+    .tagline i{width:1px; height:14px; background:rgba(255,255,255,.6); display:inline-block}
 
     .hero h1{
-      margin:18px auto 8px;
-      font-size: clamp(32px, 5.2vw, 60px);
+      margin:.1rem 0 .8rem;
+      font-size: clamp(2rem, 4vw + 1rem, 3.8rem);
       line-height:1.05;
-      font-weight:900;
-      letter-spacing: .8px;
-      color:var(--white);
-      text-shadow: 0 2px 10px rgba(0,0,0,.55);
+      letter-spacing:.02em;
+      color: var(--orange);                   /* Überschrift ORANGE */
+      text-shadow:
+        0 2px 0 rgba(0,0,0,.15),
+        0 8px 22px rgba(0,0,0,.35);
     }
 
     .hero p.lead{
-      max-width:900px;
-      margin:0 auto 22px;
-      font-size:clamp(14px, 1.5vw, 18px);
-      color:#f3f4f7;
+      max-width:980px;
+      margin:0 auto 18px;
+      color:var(--text);
       opacity:.95;
-      text-shadow: 0 1px 6px rgba(0,0,0,.45);
     }
 
-    /* Buttons – kein Unterstrich, modern */
-    .cta-row{
-      display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+    .cta{
+      display:flex; gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:4px;
     }
     .btn{
-      appearance:none; border:0; cursor:pointer;
-      font-weight:700; letter-spacing:.2px;
-      padding:12px 18px; border-radius:10px;
-      text-decoration:none; display:inline-block;
-      box-shadow: 0 6px 20px rgba(0,0,0,.25);
-      transition: transform .08s ease, box-shadow .2s ease, opacity .2s ease;
-      white-space:nowrap;
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+      border:1px solid transparent;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease, color .12s ease;
     }
-    .btn:hover{ transform: translateY(-1px); box-shadow:0 10px 26px rgba(0,0,0,.28); }
-    .btn:active{ transform: translateY(0); }
+    /* beide Buttons ORANGE mit blauer Schrift */
+    .btn--primary{
+      background: var(--orange);
+      color: var(--blue);
+      box-shadow: 0 6px 18px rgba(248,121,3,.3);
+    }
+    .btn--ghost{
+      background: var(--orange);
+      color: var(--blue);
+      box-shadow: 0 6px 18px rgba(248,121,3,.3);
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px rgba(248,121,3,.35); }
 
-    .btn--orange{
-      background: linear-gradient(180deg, #FF8B29 0%, var(--orange) 100%);
-      color:#0b0f2a;
-      border:1px solid rgba(255,255,255,.15);
-    }
-    .btn--light{
-      background:rgba(255,255,255,.9);
-      color:#1a2038;
-      border:1px solid rgba(255,255,255,.85);
-    }
-
-    /* ----------- CONTENT SECTIONS (Kurz) ----------- */
+    /* ---------------- SECTIONS ---------------- */
     .section{
-      max-width:1140px; margin:48px auto; padding:0 20px;
+      padding:72px 20px;
+      background: linear-gradient(180deg, #0a0d22 0%, #0b1540 100%);
+    }
+    .wrap{ max-width:1100px; margin:0 auto; }
+
+    h2{
+      margin:0 0 28px;
+      font-size: clamp(1.3rem, 1rem + 2vw, 2rem);
+      letter-spacing:.08em;
     }
 
-    /* Footer + Modals */
+    /* WARUM WIR – Karten */
+    .features{ display:grid; gap:18px; grid-template-columns:repeat(3,1fr); }
+    .card{
+      background: linear-gradient(180deg, #0a1335, #07102e);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:16px;
+      padding:20px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 10px 26px rgba(1,6,28,.35);
+    }
+    .card h3{ margin:8px 0 8px; }
+    .card p{ color:var(--muted); margin:0; }
+
+    /* Galerie – Slider */
+    .gallery{
+      margin-top:36px;
+      position:relative;
+    }
+    .slider{
+      overflow:hidden;
+      border-radius:18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      position:relative;
+    }
+    .slides{
+      display:flex; transition: transform .4s ease;
+    }
+    .slides img{
+      width:100%; height:420px; object-fit:cover; object-position:center;
+      flex: 0 0 100%;
+      display:block;
+    }
+    .nav{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:space-between;
+      pointer-events:none;
+    }
+    .nav button{
+      pointer-events:auto;
+      width:42px; height:42px; border-radius:50%;
+      border:1px solid rgba(255,255,255,.25);
+      background: rgba(248,121,3,.95);
+      color:var(--blue);
+      font-weight:900;
+      cursor:pointer;
+      margin:0 10px;
+      box-shadow: 0 6px 18px rgba(248,121,3,.35);
+    }
+
+    /* Trainingszeit & Standort */
+    .grid-2{ display:grid; gap:18px; grid-template-columns: 1.1fr .9fr; align-items:stretch; }
+    .panel{
+      background: linear-gradient(180deg, #0a1335, #07102e);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:16px;
+      padding:20px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 10px 26px rgba(1,6,28,.35);
+    }
+    .panel p{ color:var(--muted) }
+
+    /* Instagram Bar */
+    .ig{
+      margin-top:28px;
+      display:flex; justify-content:space-between; align-items:center;
+      gap:16px;
+      background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      padding:14px 16px;
+      border-radius:14px;
+    }
+
+    /* Sponsoren */
+    .sponsors{
+      margin-top:28px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:18px;
+      display:flex; align-items:center; justify-content:center; gap:36px; flex-wrap:wrap;
+    }
+    .sponsors img{ height:40px; opacity:.9; filter:brightness(0) invert(1); }
+
+    /* Footer + Links (öffnen Modals) */
     footer{
-      color:#cfd6ff;
-      font-size:.95rem;
-      text-align:center;
-      padding:40px 16px 60px;
-      opacity:.9;
+      background:#060913; color:#9fb0d9;
+      text-align:center; padding:32px 16px 56px;
+      border-top:1px solid rgba(255,255,255,.06);
     }
-    footer a{ color:#cfd6ff; text-decoration:none; border-bottom:1px solid rgba(255,255,255,.2) }
-    footer a:hover{ border-bottom-color:transparent }
+    footer a{ color:#9fb0d9; text-decoration:none; }
+    footer a:hover{ text-decoration:underline; }
 
+    /* Modal */
     .modal{
-      position:fixed; inset:0; display:none; place-items:center;
-      background:rgba(0,0,0,.55); padding:24px; z-index:50;
+      position:fixed; inset:0; background: rgba(3,6,18,.72);
+      display:none; align-items:center; justify-content:center; padding:20px; z-index:9999;
     }
-    .modal__card{
-      background:#121528; color:#e9ecff;
-      max-width:800px; width:100%; border-radius:14px; padding:24px;
-      box-shadow:0 20px 60px rgba(0,0,0,.5);
-      text-align:left;
+    .modal.open{ display:flex; }
+    .modal__box{
+      max-width:800px; width:100%;
+      background:#0b1540; color:#e8ecfa;
+      border-radius:16px; padding:24px;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: 0 40px 80px rgba(0,0,0,.5);
     }
-    .modal__card h3{ margin-top:0 }
-    .modal[open]{ display:grid }
-    .modal .close{
-      position:absolute; top:22px; right:22px;
-      background:transparent; border:0; color:#fff; font-size:28px; cursor:pointer;
+    .modal__box h3{ margin-top:0 }
+    .modal__box .close{ float:right; cursor:pointer; opacity:.7 }
+    .modal__box .close:hover{ opacity:1 }
+
+    /* Scroll-to-top */
+    .to-top{
+      position:fixed; right:18px; bottom:18px;
+      width:44px; height:44px; border-radius:50%;
+      border:1px solid rgba(255,255,255,.25);
+      background: var(--orange);
+      color: var(--blue);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 6px 18px rgba(248,121,3,.35);
+      cursor:pointer;
     }
 
-    /* Kleine Hilfe für sehr helle/kontrastarme Hintergründe */
-    @media (max-width:540px){
-      .top-right-logo{ width:120px }
+    /* Responsive */
+    @media (max-width:900px){
+      .features{ grid-template-columns:1fr }
+      .grid-2{ grid-template-columns:1fr }
+      .slides img{ height:320px }
+      .brand-right{ width:120px }
     }
   </style>
 </head>
 <body>
 
   <header class="hero">
-    <div class="hero__bg" aria-hidden="true"></div>
-
     <!-- Logo oben rechts -->
-    <img class="top-right-logo" src="Logo NEU DKF Transparent.png" alt="Deister Kicker Logo" />
+    <img class="brand-right" src="Logo%20NEU%20DKF%20Transparent.png" alt="Deister Kicker Logo" />
 
-    <div class="hero__content">
-      <div class="tags">
-        <span>Training</span><span class="sep"></span>
-        <span>Technik</span><span class="sep"></span>
-        <span>Athletik</span><span class="sep"></span>
+    <div>
+      <div class="tagline">
+        <span>Training</span><i></i>
+        <span>Technik</span><i></i>
+        <span>Athletik</span><i></i>
         <span>Talentförderung</span>
       </div>
 
-      <h1>DEISTER KICKER FUSSBALLSCHULE</h1>
+      <h1>DEISTER KICKER<br/>FUSSBALLSCHULE</h1>
 
       <p class="lead">
         Moderne, spielnahe Einheiten für motivierte Spielerinnen &amp; Spieler ab 5&nbsp;Jahren.
         Fokus: Spaß am Ball • klare Methodik • individuelle Entwicklung.
       </p>
 
-      <div class="cta-row">
-        <a class="btn btn--orange" href="https://wa.me/4917621698304?text=Hallo%20Deister%20Kicker!%20Ich%20möchte%20ein%20Probetraining%20anfragen.">WhatsApp – Probetraining anfragen</a>
-        <a class="btn btn--light" href="mailto:info@deisterkicker.de" rel="noopener">E-Mail senden</a>
+      <div class="cta">
+        <!-- ERSETZE die Nummer unten im wa.me-Link! -->
+        <a class="btn btn--primary" href="https://wa.me/491701234567" target="_blank" rel="noopener">
+          WhatsApp – Probetraining anfragen
+        </a>
+        <a class="btn btn--ghost" href="mailto:info@deisterkicker.de">
+          E-Mail senden
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- (Optional) Beispiel-Abschnitt – du kannst deine restlichen Bereiche hier lassen -->
   <main>
-    <section class="section" id="warum">
-      <h2>WARUM WIR?</h2>
-      <p>Kurz, klar, ehrlich – das macht unsere Fussballschule aus.</p>
+    <!-- WARUM WIR -->
+    <section class="section">
+      <div class="wrap">
+        <h2>WARUM WIR?</h2>
+        <div class="features">
+          <article class="card">
+            <h3>Individuelle Entwicklung</h3>
+            <p>Gezielte Förderung je nach Leistungsstand. Persönliche Ziele, klare Fortschritte, echtes Feedback.</p>
+          </article>
+          <article class="card">
+            <h3>Spielnah &amp; modern</h3>
+            <p>Methodik auf neuestem Stand: viel Ballkontakt, Spielformen, smarte Technik-Drills.</p>
+          </article>
+          <article class="card">
+            <h3>Familiäre Trainer-Atmosphäre</h3>
+            <p>Leidenschaftlich, nahbar, respektvoll. Vertrauen &amp; Spaß sind die Grundlage für Leistung.</p>
+          </article>
+        </div>
+
+        <!-- Galerie -->
+        <h2 style="margin-top:42px">EINDRÜCKE AUS DEM TRAINING</h2>
+        <div class="gallery">
+          <div class="slider" id="slider">
+            <div class="slides" id="slides">
+              <img src="gallery-1.jpg" alt="">
+              <img src="gallery-2.jpg" alt="">
+              <img src="gallery-3.jpg" alt="">
+              <img src="gallery-4.jpg" alt="">
+              <img src="gallery-5.jpg" alt="">
+              <img src="gallery-6.jpg" alt="">
+            </div>
+            <div class="nav">
+              <button id="prev" aria-label="Zurück">‹</button>
+              <button id="next" aria-label="Weiter">›</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trainingszeit & Standort -->
+        <h2 style="margin-top:42px">TRAININGSZEIT &amp; STANDORT</h2>
+        <div class="grid-2">
+          <div class="panel">
+            <h3>TSV HAMELSPRINGE • SPORTPLATZ</h3>
+            <p><strong>Montag:</strong> 16:45 – 18:15 Uhr (Beginn 16:45)</p>
+            <p><strong>Adresse:</strong> Kösterbrink&nbsp;2, 31848 Bad Münder am Deister</p>
+            <p><strong>Fragen?</strong> Wir freuen uns über jede Anfrage – hier beginnt die Förderung deines Kindes.
+              Zögere nicht und nimm Kontakt auf – per WhatsApp oder E-Mail.</p>
+            <div class="cta" style="justify-content:flex-start">
+              <a class="btn btn--primary" href="https://wa.me/491701234567" target="_blank" rel="noopener">WhatsApp schreiben</a>
+              <a class="btn btn--ghost" href="mailto:info@deisterkicker.de">Mail senden</a>
+            </div>
+          </div>
+          <div class="panel">
+            <iframe
+              title="TSV Hamelspringe – Sportplatz"
+              width="100%" height="320" style="border:0;border-radius:12px"
+              loading="lazy" allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=K%C3%B6sterbrink%202%2C%2031848%20Bad%20M%C3%BCnder%20am%20Deister&output=embed">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Instagram Bar -->
+        <div class="ig">
+          <div>
+            <strong>Folge uns auf Instagram</strong><br>
+            <span>@deister_kicker</span>
+          </div>
+          <a class="btn btn--ghost" href="https://www.instagram.com/deister_kicker" target="_blank" rel="noopener">Instagram ansehen</a>
+        </div>
+
+        <!-- Sponsoren (optional — lade sponsor-1.png / sponsor-2.png hoch) -->
+        <div class="sponsors" style="margin-top:36px">
+          <span style="letter-spacing:.08em; opacity:.8">UNTERSTÜTZER&nbsp;UNSERER&nbsp;FUSSBALLSCHULE</span>
+          <img src="sponsor-1.png" alt="Sponsor 1" onerror="this.style.display='none'">
+          <img src="sponsor-2.png" alt="Sponsor 2" onerror="this.style.display='none'">
+        </div>
+      </div>
     </section>
   </main>
 
+  <!-- Footer mit Modal-Links -->
   <footer>
-    <p>
-      <a href="#" id="open-impressum">Impressum</a> ·
-      <a href="#" id="open-datenschutz">Datenschutz</a>
-    </p>
-    <p>© Deister Kicker Fussballschule · 2025</p>
+    <a href="#" data-modal="impressum">Impressum</a> •
+    <a href="#" data-modal="datenschutz">Datenschutz</a>
+    <div style="margin-top:10px">© Deister Kicker Fussballschule · 2025</div>
   </footer>
 
-  <!-- Impressum Modal -->
-  <dialog class="modal" id="impressum">
-    <button class="close" data-close>&times;</button>
-    <div class="modal__card">
+  <!-- Modals -->
+  <div class="modal" id="modal-impressum" aria-hidden="true">
+    <div class="modal__box">
+      <span class="close" data-close="impressum">✕</span>
       <h3>Impressum</h3>
-      <p><strong>Deister Kicker Fussballschule</strong><br>(ein Projekt der Agentur Players Factory)</p>
+      <p><strong>Deister Kicker Fussballschule</strong><br>
+        (ein Projekt der Agentur Players Factory)</p>
       <p><strong>Geschäftsführender Inhaber:</strong> Toni Kierakowitz</p>
       <p>Hamelspringer Straße 36<br>31848 Bad Münder am Deister</p>
-      <p><strong>E-Mail:</strong> <a href="mailto:info@deisterkicker.de">info@deisterkicker.de</a></p>
+      <p><a href="mailto:info@deisterkicker.de">info@deisterkicker.de</a></p>
     </div>
-  </dialog>
+  </div>
 
-  <!-- Datenschutz Modal -->
-  <dialog class="modal" id="datenschutz">
-    <button class="close" data-close>&times;</button>
-    <div class="modal__card">
+  <div class="modal" id="modal-datenschutz" aria-hidden="true">
+    <div class="modal__box">
+      <span class="close" data-close="datenschutz">✕</span>
       <h3>Datenschutz</h3>
-      <p>Wir verarbeiten personenbezogene Daten ausschließlich zur Beantwortung von Anfragen und Organisation des Trainingsbetriebs. 
-      Eine Weitergabe an Dritte findet nicht statt. Bei Fragen wende dich bitte an <a href="mailto:info@deisterkicker.de">info@deisterkicker.de</a>.</p>
+      <p>Wir verarbeiten personenbezogene Daten ausschließlich zur Bearbeitung von Anfragen und zur Durchführung
+        unseres Trainingsbetriebs. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Eine Weitergabe an Dritte
+        erfolgt nicht. Auf Wunsch erhältst du Auskunft, Berichtigung oder Löschung deiner Daten.</p>
+      <p>Kontakt: <a href="mailto:info@deisterkicker.de">info@deisterkicker.de</a></p>
     </div>
-  </dialog>
+  </div>
+
+  <!-- Scroll-to-top -->
+  <button class="to-top" id="toTop" title="Nach oben">↑</button>
 
   <script>
-    // Modals öffnen/schließen
-    const $ = s => document.querySelector(s);
-    $('#open-impressum').addEventListener('click', e => { e.preventDefault(); $('#impressum').showModal(); });
-    $('#open-datenschutz').addEventListener('click', e => { e.preventDefault(); $('#datenschutz').showModal(); });
-    document.querySelectorAll('[data-close]').forEach(btn =>
-      btn.addEventListener('click', () => btn.closest('.modal').close())
-    );
+    // ---------- Slider ----------
+    (function(){
+      const slides = document.getElementById('slides');
+      const imgs = slides.querySelectorAll('img');
+      let idx = 0;
+
+      function go(i){
+        idx = (i + imgs.length) % imgs.length;
+        slides.style.transform = `translateX(-${idx * 100}%)`;
+      }
+      document.getElementById('next').addEventListener('click', ()=>go(idx+1));
+      document.getElementById('prev').addEventListener('click', ()=>go(idx-1));
+      // Auto-Play (sanft)
+      setInterval(()=>go(idx+1), 6000);
+    })();
+
+    // ---------- Modals ----------
+    const openers = document.querySelectorAll('footer a[data-modal]');
+    const modals = {
+      impressum: document.getElementById('modal-impressum'),
+      datenschutz: document.getElementById('modal-datenschutz')
+    };
+    openers.forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const id = a.dataset.modal;
+        modals[id].classList.add('open');
+      });
+    });
+    document.querySelectorAll('.modal .close').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = btn.dataset.close;
+        modals[id].classList.remove('open');
+      });
+    });
+    // Schließen bei Klick außerhalb
+    document.querySelectorAll('.modal').forEach(m=>{
+      m.addEventListener('click', (e)=>{ if(e.target === m) m.classList.remove('open'); });
+    });
+
+    // ---------- Nach oben ----------
+    document.getElementById('toTop').addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
   </script>
 </body>
 </html>
