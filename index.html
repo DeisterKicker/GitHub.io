@@ -12,8 +12,8 @@
       --white:#ffffff;
       --text:#E9EDF3;
       --orange:#F87903;
-      --card:#0f0147e6;     /* 90% */
-      --card-soft:#0f0147cc;/* 80% */
+      --card:#0f0147e6; /* 90% */
+      --card-soft:#0f0147cc; /* 80% */
       --muted:#9FB1D9;
       --shadow:0 10px 30px rgba(0,0,0,.35);
       --radius:14px;
@@ -27,11 +27,10 @@
       background: radial-gradient(1200px 600px at 50% 0%, #16204a 0, #0b0f2a 60%, #0a0d22 100%);
       line-height:1.5;
     }
-
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
 
-    /* ---------------- HERO ---------------- */
+    /* ---------- HERO ---------- */
     .hero{
       position:relative; min-height:92vh; width:100%;
       display:flex; align-items:center; justify-content:center; text-align:center;
@@ -42,35 +41,31 @@
       background:url("Fussball Kids Banner.jpg") center/cover no-repeat;
       transform:translateZ(0);
     }
-    /* Blauverlauf von oben nach unten – unten wieder klar */
+    /* blauer Top→Bottom Verlauf, unten klar */
     .hero::before{
       content:""; position:absolute; inset:0; z-index:-1;
       background: linear-gradient(
         to bottom,
         rgba(15,1,71,.82) 0%,
-        rgba(15,1,71,.62) 26%,
+        rgba(15,1,71,.62) 28%,
         rgba(15,1,71,.36) 52%,
-        rgba(15,1,71,.08) 70%,
+        rgba(15,1,71,.10) 70%,
         rgba(15,1,71,0) 82%
       );
     }
 
-    /* Logo oben rechts */
-    .brand{
-      position:absolute; top:24px; right:28px; z-index:5;
-      filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
-    }
-    .brand img{ width:140px; height:auto; } /* Wunschgröße */
+    .brand{ position:absolute; top:24px; right:28px; z-index:5; filter:drop-shadow(0 6px 14px rgba(0,0,0,.35)); }
+    .brand img{ width:140px; height:auto; }
 
-    /* Badge mit vertikalen Strichen */
+    .wrap{ max-width:1100px; margin:0 auto; padding:0 18px; }
+
     .badge{
       display:inline-flex; gap:12px; align-items:center;
       background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.2);
       padding:7px 12px; border-radius:999px; backdrop-filter:saturate(120%) blur(4px);
       font-size:.85rem; color:#eef2ff;
     }
-    .badge span{opacity:.95}
-    .badge i{width:1px;height:16px;background:rgba(255,255,255,.45);display:inline-block}
+    .badge i{ width:1px; height:16px; background:rgba(255,255,255,.45); display:inline-block; }
 
     .hero__title{
       margin:16px auto 10px; max-width:980px;
@@ -85,7 +80,6 @@
       text-shadow: 0 4px 12px rgba(0,0,0,.45);
     }
 
-    /* Buttons */
     .btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
@@ -98,60 +92,50 @@
     .btn--light{ background:#ffffff; color:var(--blue); }
     .btn:hover{opacity:.92}
 
-    /* Abschnitt-Container */
-    .wrap{ max-width:1100px; margin:0 auto; padding:0 18px; }
+    /* ---------- SECTIONS ---------- */
+    section{padding:60px 0}
+    h2{margin:0 0 22px; font-size: clamp(22px,4.5vw,30px)}
 
-    /* ---------------- WARUM WIR ---------------- */
-    section{padding:56px 0}
-    h2{margin:0 0 22px; font-size: clamp(22px,4.5vw,30px); color:var(--orange)}
-    .cards{
-      display:grid; gap:18px; grid-template-columns:repeat(3,1fr);
-      margin-bottom:40px; /* Abstand zum nächsten Block */
-    }
+    /* ---------- WARUM WIR ---------- */
+    .why h2{ color:var(--orange); }
+    .cards{ display:grid; gap:18px; grid-template-columns:repeat(3,1fr); }
     .card{
       background:var(--card); border:1px solid rgba(255,255,255,.06);
-      border-radius:var(--radius); padding:20px; box-shadow:var(--shadow);
-      display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:flex-start;
+      border-radius:var(--radius); padding:22px; box-shadow:var(--shadow);
     }
-    .card h3{margin:0 0 6px; font-size:18px; color:var(--orange)}
+    .card h3{margin:0 0 8px; font-size:18px; color:var(--orange);}
     .card p{margin:0; color:var(--muted); font-size:15px}
-    .icon{
-      width:26px; height:26px; color:var(--orange); flex:0 0 26px;
+    .card .icon{
+      width:34px; height:34px; border-radius:10px;
+      display:grid; place-items:center; margin-bottom:10px;
+      background:rgba(248,121,3,.10); border:1px solid rgba(248,121,3,.35);
     }
+    .card svg{ width:18px; height:18px; fill:none; stroke:var(--orange); stroke-width:2 }
 
     @media (max-width:900px){
-      .cards{ grid-template-columns:1fr; margin-bottom:34px }
+      .cards{ grid-template-columns:1fr }
     }
 
-    /* ---------------- FULL-BLEED FEATURE BILDER ---------------- */
-    .featureHero{
+    /* ---------- FEATURE BANNER (Future-1/2) ---------- */
+    .feature{
       position:relative; overflow:hidden;
       border-radius:18px; box-shadow:var(--shadow);
-      background:#000;
+      height:60vh; max-height:720px; min-height:380px;
     }
-    .featureHero img{
-      width:100%; height:64vh; object-fit:cover; object-position:center;
-      display:block;
-    }
-    @media (max-width:900px){
-      .featureHero img{ height:58vh }
+    .feature__bg{ position:absolute; inset:0; background-size:cover; background-position:center; }
+    .feature::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(15,1,71,.20), rgba(15,1,71,0) 40%, rgba(15,1,71,.25) 100%);
     }
 
-    /* ---------------- GALLERY (Slider) ---------------- */
-    .gallery{
-      background:linear-gradient(180deg, var(--card-soft), rgba(15,1,71,0));
-      padding-top:36px;
-    }
+    /* ---------- GALLERY (Slider + Lightbox) ---------- */
+    .gallery{ background:linear-gradient(180deg, var(--card-soft), rgba(15,1,71,0)); padding-top:36px; }
     .slider{
       position:relative; border-radius:18px; overflow:hidden; box-shadow:var(--shadow);
       background:#000;
     }
     .slider img{ width:100%; height:56vh; object-fit:cover }
     @media (max-width:900px){ .slider img{ height:42vh } }
-    .dotbar{ display:flex; gap:6px; justify-content:center; padding:10px 0 }
-    .dot{ width:8px; height:8px; border-radius:999px; background:#fff3; }
-    .dot.active{ background:#fff }
-
     .navArrow{
       position:absolute; top:50%; transform:translateY(-50%);
       width:44px; height:44px; border-radius:999px; border:1px solid rgba(255,255,255,.35);
@@ -159,8 +143,26 @@
       color:var(--orange); font-size:20px; box-shadow:var(--shadow)
     }
     .navArrow--left{ left:10px } .navArrow--right{ right:10px }
+    .dotbar{ display:flex; gap:6px; justify-content:center; padding:10px 0 }
+    .dot{ width:8px; height:8px; border-radius:999px; background:#fff3; }
+    .dot.active{ background:#fff }
 
-    /* ---------------- STANDORT ---------------- */
+    /* Lightbox Modal */
+    .lightbox{
+      position:fixed; inset:0; display:none; z-index:1000;
+      background:rgba(3,6,20,.85);
+    }
+    .lightbox.show{ display:flex; align-items:center; justify-content:center; }
+    .lightbox img{ max-width:92vw; max-height:86vh; border-radius:12px; box-shadow:var(--shadow) }
+    .lightbox .lb-close, .lightbox .lb-prev, .lightbox .lb-next{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:48px; height:48px; border-radius:999px; display:grid; place-items:center;
+      background:#0008; color:#fff; border:1px solid #fff3; cursor:pointer;
+    }
+    .lightbox .lb-close{ top:24px; right:24px; transform:none }
+    .lightbox .lb-prev{ left:24px } .lightbox .lb-next{ right:24px }
+
+    /* ---------- GRID (Standort & Co.) ---------- */
     .grid{ display:grid; gap:18px; grid-template-columns:1.2fr .8fr; }
     @media (max-width:900px){ .grid{ grid-template-columns:1fr } }
     .panel{
@@ -171,27 +173,24 @@
     .panel p{margin:6px 0; color:var(--muted)}
     .map{ border:0; width:100%; height:320px; border-radius:12px }
 
-    /* Instagram Callout */
+    /* Instagram */
     .ig{
       background:var(--card-soft); border:1px solid rgba(255,255,255,.06);
       border-radius:var(--radius); padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:14px
     }
     .ig__left{ display:flex; align-items:center; gap:12px }
-    .ig__badge{
-      width:36px; height:36px; border-radius:8px; display:grid; place-items:center;
-      background:#111; color:#fff; font-weight:800;
-    }
+    .ig__badge{ width:36px; height:36px; border-radius:8px; display:grid; place-items:center; background:#111; color:#fff; font-weight:800; }
 
-    /* ---------------- SPONSOREN ---------------- */
+    /* Sponsors */
     .sponsors{
       display:flex; gap:28px; align-items:center; justify-content:center; flex-wrap:wrap;
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.06); border-radius:var(--radius);
       padding:24px; box-shadow:var(--shadow)
     }
-    .sponsors img{ height:40px; filter:brightness(0) invert(1) opacity(.9) }
+    .sponsors img{ height:40px; filter:brightness(0) invert(1) opacity(.85) }
 
-    /* ---------------- FOOTER & MODALS ---------------- */
+    /* Footer & Modals */
     footer{ padding:26px 0 40px; color:#b8c3e0; font-size:14px }
     .footlinks{ display:flex; gap:16px; justify-content:center; margin-bottom:10px }
     .footlinks a{ text-decoration:underline; text-underline-offset:3px }
@@ -213,6 +212,9 @@
       background:var(--orange); color:var(--blue); display:grid; place-items:center;
       box-shadow:var(--shadow); cursor:pointer; z-index:9; border:1px solid #0002;
     }
+
+    /* Extra spacing below WHY to avoid overlap with next banner */
+    .why{ padding-bottom:72px; }
   </style>
 </head>
 
@@ -252,61 +254,44 @@
 
   <main>
     <!-- WARUM WIR -->
-    <section class="wrap">
+    <section class="wrap why">
       <h2>WARUM WIR?</h2>
       <div class="cards">
         <article class="card">
-          <!-- Icon: Zielscheibe -->
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="8"></circle>
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v4M2 12h4M18 12h4M12 18v4"></path>
-          </svg>
-          <div>
-            <h3>Individuelle Entwicklung</h3>
-            <p>Gezielte Förderung je nach Leistungsstand. Persönliche Ziele, klare Fortschritte, echtes Feedback.</p>
+          <div class="icon" aria-hidden="true">
+            <!-- Zielscheibe -->
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/></svg>
           </div>
+          <h3>Individuelle Entwicklung</h3>
+          <p>Gezielte Förderung je nach Leistungsstand. Persönliche Ziele, klare Fortschritte, echtes Feedback.</p>
         </article>
-
         <article class="card">
-          <!-- Icon: Ball/Spiel -->
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="9"></circle>
-            <path d="M12 3v18M3 12h18M5 5l14 14M19 5L5 19"></path>
-          </svg>
-          <div>
-            <h3>Spielnah &amp; modern</h3>
-            <p>Methodik auf neuestem Stand: viel Ballkontakt, Spielformen, smarte Technik-Drills.</p>
+          <div class="icon" aria-hidden="true">
+            <!-- Ball + Bewegung -->
+            <svg viewBox="0 0 24 24"><path d="M4 15c3-2 6-2 8 0M14 9l3-3m-9 9 3-3"/><circle cx="18" cy="6" r="2"/></svg>
           </div>
+          <h3>Spielnah &amp; modern</h3>
+          <p>Methodik auf neuestem Stand: viel Ballkontakt, Spielformen, smarte Technik-Drills.</p>
         </article>
-
         <article class="card">
-          <!-- Icon: Herzlinie -->
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 12c0-3 2-5 5-5 2 0 3 1 4 2 1-1 2-2 4-2 3 0 5 2 5 5 0 6-9 9-9 9S3 18 3 12z"></path>
-          </svg>
-          <div>
-            <h3>Familiäre Trainer-Atmosphäre</h3>
-            <p>Leidenschaftlich, nahbar, respektvoll. Vertrauen &amp; Spaß sind die Grundlage für Leistung.</p>
+          <div class="icon" aria-hidden="true">
+            <!-- Herz -->
+            <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9-8.5C1 9 3 6.5 6 6.5c2 0 3.2 1.1 4 2.1.8-1 2-2.1 4-2.1 3 0 5 2.5 3 6.0C19 16.5 12 21 12 21z"/></svg>
           </div>
+          <h3>Familiäre Trainer-Atmosphäre</h3>
+          <p>Leidenschaftlich, nahbar, respektvoll. Vertrauen &amp; Spaß sind die Grundlage für Leistung.</p>
         </article>
       </div>
     </section>
 
-    <!-- FEATURE BILDER (ohne Overlay) -->
-    <section class="wrap">
-      <div class="featureHero">
-        <img src="future-1.jpg" alt="Gemeinsam stärker – Impression" />
+    <!-- FEATURE BANNER 1 -->
+    <section class="wrap" style="padding-top:0">
+      <div class="feature" aria-label="Gemeinsam stärker – Impression">
+        <div class="feature__bg" style="background-image:url('Future-1.jpg');"></div>
       </div>
     </section>
 
-    <section class="wrap" style="padding-top:26px">
-      <div class="featureHero">
-        <img src="future-2.jpg" alt="Training wie die Profis – Impression" />
-      </div>
-    </section>
-
-    <!-- GALLERY / SLIDER -->
+    <!-- EINDRÜCKE / SLIDER -->
     <section class="gallery">
       <div class="wrap">
         <h2>EINDRÜCKE AUS DEM TRAINING</h2>
@@ -323,14 +308,17 @@
           <button class="navArrow navArrow--right" aria-label="Weiter" onclick="nextSlide()">›</button>
         </div>
         <div class="dotbar" id="dotbar" aria-hidden="true"></div>
-
-        <p style="opacity:.7; font-size:.9rem; margin:.5rem 0 0;">
-          Tipp: Bild anklicken – Lightbox öffnet sich in groß.
-        </p>
       </div>
     </section>
 
-    <!-- STANDORT -->
+    <!-- FEATURE BANNER 2 -->
+    <section class="wrap" style="padding-top:0">
+      <div class="feature" aria-label="Training wie die Profis – Impression">
+        <div class="feature__bg" style="background-image:url('Future-2.jpg');"></div>
+      </div>
+    </section>
+
+    <!-- STANDORT / KONTAKT / IG / SPONSOREN -->
     <section>
       <div class="wrap grid">
         <div class="panel">
@@ -416,18 +404,26 @@
     </div>
   </section>
 
+  <!-- LIGHTBOX (für Slider-Bilder) -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <img id="lb-img" alt="Foto in Großansicht" />
+    <button class="lb-close" aria-label="Schließen" onclick="closeLB()">✕</button>
+    <button class="lb-prev"  aria-label="Vorheriges Bild" onclick="lbPrev()">‹</button>
+    <button class="lb-next"  aria-label="Nächstes Bild"  onclick="lbNext()">›</button>
+  </div>
+
   <script>
-    // Lazy-init slider images
+    /* ----- Lazy-load Slider Images ----- */
     document.querySelectorAll('.slider img').forEach(img=>{
       const src = img.getAttribute('data-src'); if(src) img.src = src;
     });
 
-    // Simple slider
+    /* ----- Simple Slider ----- */
     const slider = document.getElementById('slider');
     let slides = Array.from(slider.querySelectorAll('img'));
-    slides = slides.filter(s => s.complete || s.naturalWidth || s.src);
-
+    slides = slides.filter(s => s.getAttribute('data-src')); // nur existierende
     let idx = 0;
+
     function show(i){
       if(!slides.length) return;
       idx = (i+slides.length) % slides.length;
@@ -439,14 +435,23 @@
     function prevSlide(){ show(idx-1) }
     show(0);
 
-    // Lightbox on click
-    slider.addEventListener('click', e=>{
-      const src = slides[idx]?.src; if(!src) return;
-      const w = window.open("", "_blank");
-      if(w) w.document.write(`<title>Foto</title><img src="${src}" style="max-width:100%;display:block;margin:auto">`);
+    /* ----- Lightbox (bleibt auf der Seite, kein neuer Tab) ----- */
+    const lb   = document.getElementById('lightbox');
+    const lbImg= document.getElementById('lb-img');
+    function openLB(i){ show(i); lbImg.src = slides[idx].src; lb.classList.add('show'); lb.setAttribute('aria-hidden','false'); }
+    function closeLB(){ lb.classList.remove('show'); lb.setAttribute('aria-hidden','true'); }
+    function lbNext(){ nextSlide(); lbImg.src = slides[idx].src; }
+    function lbPrev(){ prevSlide(); lbImg.src = slides[idx].src; }
+    window.addEventListener('keydown', e=>{
+      if(!lb.classList.contains('show')) return;
+      if(e.key==='Escape') closeLB();
+      if(e.key==='ArrowRight') lbNext();
+      if(e.key==='ArrowLeft') lbPrev();
     });
+    // Klick auf Slide öffnet Lightbox statt neuem Tab
+    slider.addEventListener('click', ()=> openLB(idx));
 
-    // Modals
+    /* ----- Modals ----- */
     function openModal(id){ document.getElementById(id).classList.add('show') }
     function closeModal(id){ document.getElementById(id).classList.remove('show') }
     window.addEventListener('keydown', e=>{
