@@ -8,9 +8,6 @@
   <style>
     :root{
       --blue:#0F0147;
-      --blue-80:rgba(15,1,71,.80);
-      --blue-60:rgba(15,1,71,.60);
-      --blue-35:rgba(15,1,71,.35);
       --white:#ffffff;
       --text:#E9EDF3;
       --orange:#F87903;
@@ -29,7 +26,6 @@
       background: radial-gradient(1200px 600px at 50% 0%, #16204a 0, #0b0f2a 60%, #0a0d22 100%);
       line-height:1.5;
     }
-
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
 
@@ -42,9 +38,7 @@
     .hero__bg{
       position:absolute; inset:0; z-index:-2;
       background:url("Fussball Kids Banner.jpg") center/cover no-repeat;
-      transform:translateZ(0);
     }
-    /* Verlauf: oben dunkel → unten klar */
     .hero::before{
       content:""; position:absolute; inset:0; z-index:-1;
       background: linear-gradient(to bottom,
@@ -91,36 +85,51 @@
     .btn--light{ background:#ffffff; color:var(--blue); }
     .btn:hover{opacity:.92}
 
-    /* Abschnitt-Container */
+    /* Container */
     .wrap{ max-width:1100px; margin:0 auto; padding:0 18px; }
 
     /* ---------------- WARUM WIR ---------------- */
     section{padding:56px 0}
-    h2{margin:0 0 22px; font-size: clamp(22px,4.5vw,30px)}
-    .why{ padding-bottom:84px; } /* EXTRAPLATZ nach unten */
+    .why h2{margin:0 0 22px; font-size: clamp(22px,4.5vw,30px); color:var(--orange);}
     .cards{ display:grid; gap:18px; grid-template-columns:repeat(3,1fr); }
     .card{
       background:var(--card); border:1px solid rgba(255,255,255,.06);
       border-radius:var(--radius); padding:20px; box-shadow:var(--shadow);
       display:grid; grid-template-columns:40px 1fr; gap:14px; align-items:flex-start;
     }
-    .card h3{margin:0 0 6px; font-size:18px}
+    .card h3{margin:0 0 6px; font-size:18px; color:var(--orange)}
     .card p{margin:0; color:var(--muted); font-size:15px}
     .icon{
       width:40px; height:40px; border-radius:10px; display:grid; place-items:center;
       background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
     }
-    .icon svg{ width:22px; height:22px; opacity:.95 }
+    .icon svg{ width:22px; height:22px; stroke:var(--orange); }
 
-    @media (max-width:900px){
-      .cards{ grid-template-columns:1fr }
-      .why{ padding-bottom:64px }
+    @media (max-width:900px){ .cards{ grid-template-columns:1fr } }
+
+    /* ---------------- FEATURE-BÄNDER ---------------- */
+    .feature{
+      position:relative; min-height:58vh; display:flex; align-items:flex-end; justify-content:center; text-align:center;
+      overflow:hidden;
     }
+    .feature img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(105%); }
+    .feature::after{ /* dunkles Verlaufsoverlay für Lesbarkeit */
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(8,12,35,.55) 0%, rgba(8,12,35,.35) 45%, rgba(8,12,35,.0) 70%);
+    }
+    .feature__box{
+      position:relative; z-index:2; margin:28px auto; padding:14px 18px 18px;
+      background:rgba(15,1,71,.58); border:1px solid rgba(255,255,255,.12);
+      border-radius:14px; box-shadow:var(--shadow); color:#eef2ff; max-width:1000px;
+    }
+    .feature__title{ margin:0 0 6px; font-weight:800; letter-spacing:.02em; font-size:clamp(22px,5vw,36px); color:var(--orange) }
+    .feature__sub{ margin:0; opacity:.95 }
 
     /* ---------------- GALLERY (Slider) ---------------- */
     .gallery{ background:linear-gradient(180deg, var(--card-soft), rgba(15,1,71,0)); padding-top:36px; }
     .slider{
       position:relative; border-radius:18px; overflow:hidden; box-shadow:var(--shadow); background:#000;
+      margin-top:18px;
     }
     .slider img{ width:100%; height:56vh; object-fit:cover }
     @media (max-width:900px){ .slider img{ height:42vh } }
@@ -232,7 +241,9 @@
         <article class="card">
           <div class="icon" aria-hidden="true">
             <!-- Zielscheibe -->
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="2"/>
+            </svg>
           </div>
           <div>
             <h3>Individuelle Entwicklung</h3>
@@ -242,8 +253,11 @@
 
         <article class="card">
           <div class="icon" aria-hidden="true">
-            <!-- Taktik -->
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 17l4-4m0 0-4-4m4 4h6m6-6l-4 4m0 0 4 4"/></svg>
+            <!-- Fußball + Pfeil -->
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <circle cx="8" cy="15" r="4"/>
+              <path d="M14 6h6v6M20 6l-8 8"/>
+            </svg>
           </div>
           <div>
             <h3>Spielnah &amp; modern</h3>
@@ -253,14 +267,25 @@
 
         <article class="card">
           <div class="icon" aria-hidden="true">
-            <!-- Herz/Team -->
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 21s-7-4.35-7-9a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 4.65-7 9-7 9z"/></svg>
+            <!-- Herz -->
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M12 21s-7-4.35-7-9a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 4.65-7 9-7 9z"/>
+            </svg>
           </div>
           <div>
             <h3>Familiäre Trainer-Atmosphäre</h3>
             <p>Leidenschaftlich, nahbar, respektvoll. Vertrauen &amp; Spaß sind die Grundlage für Leistung.</p>
           </div>
         </article>
+      </div>
+    </section>
+
+    <!-- FEATURE-BAND #1 -->
+    <section class="feature" aria-label="Feature 1">
+      <img src="Future-1.jpg" alt="" onerror="this.src='Future-1.jpeg'">
+      <div class="feature__box">
+        <div class="feature__title">GEMEINSAM STÄRKER</div>
+        <p class="feature__sub">Drills, Spielformen &amp; viel Ballzeit – Spaß &amp; Fortschritt in jeder Einheit.</p>
       </div>
     </section>
 
@@ -281,6 +306,15 @@
         </div>
         <div class="dotbar" id="dotbar" aria-hidden="true"></div>
         <p style="opacity:.7; font-size:.9rem; margin:.5rem 0 0;">Tipp: Bild anklicken – Lightbox öffnet sich in groß.</p>
+      </div>
+    </section>
+
+    <!-- FEATURE-BAND #2 -->
+    <section class="feature" aria-label="Feature 2">
+      <img src="Future-2.jpg" alt="" onerror="this.src='Future-2.jpeg'">
+      <div class="feature__box">
+        <div class="feature__title">TRAINIEREN WIE DIE PROFIS</div>
+        <p class="feature__sub">Strukturierte Einheiten, klare Ziele – wir holen das Beste aus jeder Spielerin &amp; jedem Spieler.</p>
       </div>
     </section>
 
