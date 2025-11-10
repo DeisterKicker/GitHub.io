@@ -6,406 +6,395 @@
 <title>DEISTER KICKER FUSSBALLSCHULE</title>
 
 <style>
-:root{
-  --blue:#0F0147;
-  --blue-80:#0f0147cc;
-  --blue-60:#0f014799;
-  --blue-40:#0f014766;
-  --white:#ffffff;
-  --text:#E9EDF3;
-  --orange:#F87903;
-  --muted:#9FB1D9;
-  --shadow:0 12px 30px rgba(0,0,0,.35);
-  --radius:16px;
-}
+  :root{
+    --blue:#0F0147;
+    --blue-90:#0f0147e6;
+    --blue-80:#0f0147cc;
+    --text:#E9EDF3;
+    --muted:#9FB1D9;
+    --white:#fff;
+    --orange:#F87903;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+    --radius:14px;
+  }
 
-/* Reset/Basics */
-*{box-sizing:border-box}
-html,body{margin:0}
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--text);
-  background: radial-gradient(1200px 600px at 50% 0%, #16204a 0, #0b0f2a 60%, #0a0d22 100%);
-  line-height: 1.5;
-}
-a{color:inherit; text-decoration:none}
-img{max-width:100%; display:block}
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--text);
+    background: radial-gradient(1200px 600px at 50% 0%, #16204a 0, #0b0f2a 60%, #0a0d22 100%);
+    line-height:1.5;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
 
-/* Containers */
-.wrap{max-width:1100px; margin:0 auto; padding:0 18px}
-section{padding:72px 0}          /* mehr Luft zwischen Sektionen */
-h2{margin:0 0 24px; font-size:clamp(22px,4.5vw,30px)}
+  /* ---------------- HERO ---------------- */
+  .hero{
+    position:relative; min-height:92vh; width:100%;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    overflow:hidden;
+  }
+  .hero__bg{
+    position:absolute; inset:0; z-index:-2;
+    background:url("Fussball Kids Banner.jpg") center/cover no-repeat;
+  }
+  /* Blaue Vignette von oben -> unten klar */
+  .hero::before{
+    content:""; position:absolute; inset:0; z-index:-1;
+    background: linear-gradient(to bottom,
+      rgba(15,1,71,.82) 0%,
+      rgba(15,1,71,.62) 28%,
+      rgba(15,1,71,.36) 52%,
+      rgba(15,1,71,.08) 70%,
+      rgba(15,1,71,0) 82%);
+  }
+  /* Logo */
+  .brand{position:absolute; top:24px; right:28px; z-index:5; filter: drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+  .brand img{ width:140px; height:auto; }
 
-/* -------------------- HERO -------------------- */
-.hero{
-  position:relative; min-height:92vh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden;
-}
-.hero__bg{
-  position:absolute; inset:0; z-index:-2;
-  background:url("Fussball Kids Banner.jpg") center/cover no-repeat;
-}
-/* klarer, blauer Verlauf (oben dunkel, unten klar) */
-.hero::before{
-  content:""; position:absolute; inset:0; z-index:-1;
-  background:linear-gradient(to bottom,
-    rgba(15,1,71,.82) 0%,
-    rgba(15,1,71,.64) 28%,
-    rgba(15,1,71,.36) 52%,
-    rgba(15,1,71,.10) 70%,
-    rgba(15,1,71,0) 85%);
-}
+  /* Badge mit vertikalen Strichen */
+  .badge{display:inline-flex; gap:12px; align-items:center; background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.2); padding:7px 12px; border-radius:999px; backdrop-filter:saturate(120%) blur(4px);
+    font-size:.85rem; color:#eef2ff;}
+  .badge i{width:1px; height:16px; background:rgba(255,255,255,.45); display:inline-block}
 
-/* Logo oben rechts */
-.brand{position:absolute; top:24px; right:28px; z-index:5; filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
-.brand img{width:140px; height:auto} /* 140px wie besprochen */
+  .hero__title{
+    margin:16px auto 10px; max-width:980px;
+    font-size: clamp(28px, 6vw, 54px); font-weight:800; letter-spacing:.02em; line-height:1.05;
+    color:var(--orange); text-shadow: 0 6px 18px rgba(0,0,0,.45);
+  }
+  .hero__subtitle{max-width:980px; margin:0 auto 22px; color:#eef2ff; opacity:.92; font-size:clamp(14px, 2.7vw, 18px); text-shadow: 0 4px 12px rgba(0,0,0,.45)}
 
-/* Badge mit VERTIKALEN Strichen */
-.badge{
-  display:inline-flex; gap:12px; align-items:center;
-  background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.2);
-  padding:7px 12px; border-radius:999px; backdrop-filter:saturate(120%) blur(4px);
-  font-size:.85rem; color:#eef2ff;
-}
-.badge i{width:1px; height:16px; background:rgba(255,255,255,.45); display:inline-block}
+  /* Buttons */
+  .btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; border-radius:10px; font-weight:700; border:1px solid transparent; cursor:pointer; transition:.2s transform,.2s opacity; box-shadow:var(--shadow)}
+  .btn:active{transform:translateY(1px)}
+  .btn--brand{ background:var(--orange); color:var(--blue); }
+  .btn--light{ background:#ffffff; color:var(--blue); }
+  .btn:hover{opacity:.92}
 
-.hero__title{
-  margin:16px auto 10px; max-width:980px;
-  font-size:clamp(28px,6vw,54px); font-weight:800; letter-spacing:.02em; line-height:1.05;
-  color:var(--orange); text-shadow:0 6px 18px rgba(0,0,0,.45);
-}
-.hero__subtitle{
-  max-width:980px; margin:0 auto 22px; color:#eef2ff; opacity:.92; font-size:clamp(14px,2.7vw,18px);
-  text-shadow:0 4px 12px rgba(0,0,0,.45);
-}
+  .wrap{ max-width:1100px; margin:0 auto; padding:0 18px; }
+  section{padding:56px 0}
+  h2{margin:0 0 22px; font-size: clamp(22px,4.5vw,30px)}
 
-/* Buttons */
-.btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:12px 18px; border-radius:12px; font-weight:700; border:1px solid transparent;
-  cursor:pointer; transition:.2s transform, .2s opacity; box-shadow:var(--shadow)
-}
-.btn:active{transform:translateY(1px)}
-.btn--brand{background:var(--orange); color:var(--blue)}  /* Orange mit blauer Schrift */
-.btn--light{background:#ffffff; color:var(--blue)}
-.btn:hover{opacity:.94}
+  /* ---------------- WARUM WIR ---------------- */
+  .why h2{ color:var(--orange); }
+  .cards{ display:grid; gap:18px; grid-template-columns:repeat(3,1fr); }
+  .card{ background:var(--blue-90); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+  .card h3{margin:0 0 8px; font-size:18px; color:var(--orange); display:flex; align-items:center; gap:10px}
+  .card p{margin:0; color:var(--muted); font-size:15px}
+  .icon{width:22px; height:22px; flex:0 0 22px; display:inline-block}
+  /* mehr Abstand zum nächsten Abschnitt */
+  .why{padding-bottom:72px}
 
-/* -------------------- WARUM WIR -------------------- */
-h2.title-orange{color:var(--orange)}
-.cards{display:grid; gap:18px; grid-template-columns:repeat(3,1fr)}
-.card{
-  background:var(--blue-80); border:1px solid rgba(255,255,255,.06);
-  border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)
-}
-.card h3{margin:0 0 8px; font-size:18px; color:var(--orange); display:flex; align-items:center; gap:10px}
-.card p{margin:0; color:var(--muted); font-size:15px}
-.icon{
-  width:22px; height:22px; display:inline-block; border-radius:8px;
-  box-shadow:inset 0 0 0 2px var(--orange); position:relative;
-}
-.icon:before, .icon:after{content:""; position:absolute; background:var(--orange)}
-/* drei einfache, „professionellere“ Icons */
-.icon.dev:before{width:12px;height:12px; border-radius:50%; top:5px; left:5px}
-.icon.play:before{width:0;height:0;border-left:10px solid var(--orange);border-top:6px solid transparent;border-bottom:6px solid transparent;left:6px;top:5px}
-.icon.heart:before{width:10px;height:10px;background:none;border-left:2px solid var(--orange);border-top:2px solid var(--orange);transform:rotate(-45deg);left:5px;top:7px}
-.icon.heart:after{width:10px;height:10px;background:none;border-right:2px solid var(--orange);border-top:2px solid var(--orange);transform:rotate(45deg);right:5px;top:7px}
+  @media (max-width:900px){ .cards{ grid-template-columns:1fr } }
 
-@media (max-width:980px){ .cards{grid-template-columns:1fr} }
+  /* ---------------- FEATURE BILDER (Future-1/2) ---------------- */
+  .feature{
+    padding:0; /* Full-bleed */
+  }
+  .feature .fullbleed{
+    width:100%;
+    margin:0 auto;
+  }
+  .feature .fullbleed img{
+    width:100%;
+    height:auto;         /* NICHT zuschneiden */
+    display:block;
+  }
+  /* zusätzlicher Abstand über & unter Future-1 */
+  .spacer-top{ margin-top:24px }
+  .spacer-bottom{ margin-bottom:36px }
 
-/* -------------------- FEATURE-BANNER (Future-1/2) -------------------- */
-.feature{
-  position:relative; width:100%; height:70vh;     /* „70“ wie gewünscht */
-  background:#000 center/cover no-repeat;
-  border-radius:0; overflow:hidden;
-}
-.feature + .wrap{margin-top:10px} /* etwas Abstand zum nächsten Titel */
-.feature--1{ background-image:url("Future-1.jpg"); }
-.feature--2{ background-image:url("Future-2.jpg"); }
-@media (max-width:900px){ .feature{height:60vh} }
-@media (max-width:600px){ .feature{height:52vh} }
+  /* ---------------- HANDY-SLIDER (Variante B) ---------------- */
+  .gallery h2{ color:var(--orange); }
+  .phone-stage{
+    background:linear-gradient(180deg, var(--blue-80), rgba(15,1,71,0));
+    border-radius:22px; padding:46px 40px 30px; position:relative; box-shadow:var(--shadow);
+  }
+  .phone{
+    width:min(72vw,360px); height:min(72vh,620px);
+    margin:0 auto; border-radius:28px; background:#111; overflow:hidden; position:relative; box-shadow:0 6px 28px rgba(0,0,0,.5);
+  }
+  .phone::before{
+    content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
+    width:40%; height:22px; background:#000; border-bottom-left-radius:14px; border-bottom-right-radius:14px;
+  }
+  .phone img{ width:100%; height:100%; object-fit:cover }
+  .navArrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:42px; height:42px; border-radius:999px; border:1px solid rgba(255,255,255,.28);
+    display:grid; place-items:center; background:rgba(0,0,0,.35); cursor:pointer; color:var(--orange); font-size:20px;
+  }
+  .navArrow--left{ left:14px } .navArrow--right{ right:14px }
+  .dotbar{ display:flex; gap:6px; justify-content:center; padding:12px 0 0 }
+  .dot{ width:8px; height:8px; border-radius:999px; background:#fff3 } .dot.active{ background:#fff }
 
-/* -------------------- HANDY-SLIDER (Variante B) -------------------- */
-.gallery{padding:64px 0; background:linear-gradient(180deg, var(--blue-60), rgba(15,1,71,0))}
-.phone-slider{
-  position:relative; background:var(--blue-80); border:1px solid rgba(255,255,255,.06);
-  border-radius:28px; padding:36px; box-shadow:var(--shadow); max-width:860px; margin:0 auto;
-}
-.phone{
-  width:min(48vw,360px); height:min(82vh,640px); margin:0 auto;
-  background:#000; border-radius:30px; padding:10px; position:relative; box-shadow:0 20px 60px rgba(0,0,0,.45)
-}
-.phone:before{ /* Notch */
-  content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
-  width:42%; height:24px; background:#000; border-bottom-left-radius:16px; border-bottom-right-radius:16px;
-}
-.phone img{width:100%; height:100%; object-fit:cover; border-radius:22px}
-.ps-arw{
-  position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:999px;
-  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.35); color:var(--orange);
-  display:grid; place-items:center; cursor:pointer;
-}
-.ps-arw.left{left:-22px} .ps-arw.right{right:-22px}
-.dotbar{display:flex; gap:6px; justify-content:center; margin-top:12px}
-.dot{width:8px; height:8px; border-radius:999px; background:#fff3}
-.dot.active{background:#fff}
+  /* ---------------- STANDORT & IG ---------------- */
+  .grid{ display:grid; gap:18px; grid-template-columns:1.2fr .8fr; }
+  @media (max-width:900px){ .grid{ grid-template-columns:1fr } }
+  .panel{ background:var(--blue-90); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow) }
+  .panel h2{ color:var(--orange) }
+  .panel h3{ margin:.5rem 0 1rem }
+  .map{ border:0; width:100%; height:320px; border-radius:12px }
+  .ig{ background:var(--blue-80); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:14px }
+  .ig__left{ display:flex; align-items:center; gap:12px }
+  .ig__badge{ width:36px; height:36px; border-radius:8px; display:grid; place-items:center; background:#111; color:#fff; font-weight:800 }
 
-/* Lightbox auf der Seite */
-.lb{position:fixed; inset:0; background:rgba(5,8,20,.85); display:none; align-items:center; justify-content:center; padding:20px; z-index:60}
-.lb.show{display:flex}
-.lb img{max-width:92vw; max-height:86vh; border-radius:14px; box-shadow:var(--shadow);}
+  /* ---------------- SPONSOREN ---------------- */
+  .sponsors-wrap{ background:var(--blue-90); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+  .sponsors-title{ text-align:center; margin:0 0 12px; }
+  .sponsors{
+    display:flex; gap:30px; align-items:center; justify-content:center; flex-wrap:wrap;
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    border:1px solid rgba(255,255,255,.06); border-radius:var(--radius);
+    padding:24px;
+  }
+  .sponsors img{ height:44px; filter:brightness(0) invert(1) opacity(.88) }
 
-/* -------------------- STANDORT/INSTAGRAM/SPONSOREN -------------------- */
-.grid{display:grid; gap:22px; grid-template-columns:1.2fr .8fr}
-@media (max-width:980px){ .grid{grid-template-columns:1fr} }
-.panel{
-  background:var(--blue-80); border:1px solid rgba(255,255,255,.06);
-  border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)
-}
-.panel h2{color:var(--orange); margin-top:0}
-.panel h3{margin:.5rem 0 1rem}
-.panel p{margin:6px 0; color:var(--muted)}
-.map{border:0; width:100%; height:320px; border-radius:12px}
-.ig{background:var(--blue-60); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:16px 18px; display:flex; justify-content:space-between; align-items:center; gap:14px}
-.ig__badge{width:36px; height:36px; border-radius:8px; display:grid; place-items:center; background:#111; color:#fff; font-weight:800}
-.sponsors{
-  display:flex; gap:28px; align-items:center; justify-content:center; flex-wrap:wrap;
-  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow)
-}
-.sponsors img{height:44px; filter:brightness(0) invert(1) opacity(.9)} /* weiß/einfarbig */
-.sponsors img[hidden]{display:none !important}
+  /* ---------------- FOOTER & MODALS ---------------- */
+  footer{ padding:26px 0 40px; color:#b8c3e0; font-size:14px }
+  .footlinks{ display:flex; gap:16px; justify-content:center; margin-bottom:10px }
+  .footlinks a{ text-decoration:underline; text-underline-offset:3px }
 
-/* -------------------- FOOTER & MODALS -------------------- */
-footer{padding:28px 0 44px; color:#b8c3e0; font-size:14px}
-.footlinks{display:flex; gap:16px; justify-content:center; margin-bottom:10px}
-.footlinks a{text-decoration:underline; text-underline-offset:3px}
+  .modal{ position:fixed; inset:0; background:rgba(3,6,20,.65); display:none; align-items:center; justify-content:center; padding:18px; z-index:50; }
+  .modal__card{ background:#0b0f2a; color:#e9edf3; max-width:820px; width:100%;
+    border:1px solid rgba(255,255,255,.08); border-radius:16px; box-shadow:var(--shadow); padding:22px; max-height:86vh; overflow:auto; }
+  .modal__close{ float:right; cursor:pointer; opacity:.8 }
+  .modal.show{ display:flex }
 
-.modal{position:fixed; inset:0; background:rgba(3,6,20,.65); display:none; align-items:center; justify-content:center; padding:18px; z-index:70}
-.modal__card{
-  background:#0b0f2a; color:#e9edf3; max-width:820px; width:100%; border:1px solid rgba(255,255,255,.08);
-  border-radius:16px; box-shadow:var(--shadow); padding:22px; max-height:86vh; overflow:auto
-}
-.modal.show{display:flex}
-.modal__close{float:right; cursor:pointer; opacity:.8}
-
-/* Back-to-top */
-.toTop{position:fixed; right:18px; bottom:18px; width:44px; height:44px; border-radius:999px; background:var(--orange); color:var(--blue); display:grid; place-items:center; box-shadow:var(--shadow); border:1px solid #0002; z-index:90}
+  /* Back-To-Top */
+  .toTop{ position:fixed; right:18px; bottom:18px; width:44px; height:44px; border-radius:999px; background:var(--orange); color:var(--blue); display:grid; place-items:center; box-shadow:var(--shadow); cursor:pointer; z-index:9; border:1px solid #0002 }
 </style>
 </head>
 
 <body>
 
-<!-- ================== HERO ================== -->
-<header class="hero">
-  <div class="hero__bg" aria-hidden="true"></div>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
 
-  <!-- Logo -->
-  <a class="brand" href="#top" aria-label="Start">
-    <img src="Logo NEU DKF Transparent.png" alt="Deister Kicker Logo">
-  </a>
+    <!-- Logo -->
+    <a class="brand" href="#top" aria-label="Start">
+      <img src="Logo NEU DKF Transparent.png" alt="Deister Kicker Logo" />
+    </a>
 
-  <div class="wrap" id="top">
-    <div class="badge" aria-label="Schwerpunkte">
-      <span>Training</span><i></i><span>Technik</span><i></i><span>Athletik</span><i></i><span>Talentförderung</span>
-    </div>
-
-    <h1 class="hero__title">DEISTER KICKER FUSSBALLSCHULE</h1>
-
-    <p class="hero__subtitle">
-      Moderne, spielnahe Einheiten für motivierte Spielerinnen &amp; Spieler ab 5 Jahren. Fokus:
-      <strong>Spaß am Ball</strong> • <strong>klare Methodik</strong> • <strong>individuelle Entwicklung</strong>.
-    </p>
-
-    <div class="btns">
-      <a class="btn btn--brand"
-         href="https://wa.me/4917661779069?text=Hallo%20Deister%20Kicker!%20Ich%20h%C3%A4tte%20Interesse%20an%20einem%20Probetraining."
-         target="_blank" rel="noopener">WhatsApp – Probetraining anfragen</a>
-      <a class="btn btn--brand" href="mailto:info@deisterkicker.de">E-Mail senden</a>
-    </div>
-  </div>
-</header>
-
-<!-- ================== WARUM WIR ================== -->
-<section class="wrap">
-  <h2 class="title-orange">WARUM WIR?</h2>
-  <div class="cards">
-    <article class="card">
-      <h3><span class="icon dev"></span>Individuelle Entwicklung</h3>
-      <p>Gezielte Förderung je nach Leistungsstand. Persönliche Ziele, klare Fortschritte, echtes Feedback.</p>
-    </article>
-    <article class="card">
-      <h3><span class="icon play"></span>Spielnah &amp; modern</h3>
-      <p>Methodik auf neuestem Stand: viel Ballkontakt, Spielformen, smarte Technik-Drills.</p>
-    </article>
-    <article class="card">
-      <h3><span class="icon heart"></span>Familiäre Trainer-Atmosphäre</h3>
-      <p>Leidenschaftlich, nahbar, respektvoll. Vertrauen &amp; Spaß sind die Grundlage für Leistung.</p>
-    </article>
-  </div>
-</section>
-
-<!-- ================== FEATURE BANNER 1 ================== -->
-<section class="feature feature--1" title="Gemeinsam erfolgreich – Impression"></section>
-
-<!-- ================== GALLERY / HANDY-SLIDER ================== -->
-<section class="gallery">
-  <div class="wrap">
-    <h2>EINDRÜCKE AUS DEM TRAINING</h2>
-
-    <div class="phone-slider" id="ps">
-      <button class="ps-arw left"  aria-label="Zurück" onclick="psPrev()">‹</button>
-      <div class="phone">
-        <img id="psImg" alt="Training">
+    <div class="wrap" id="top">
+      <div class="badge" aria-label="Schwerpunkte">
+        <span>Training</span><i></i><span>Technik</span><i></i><span>Athletik</span><i></i><span>Talentförderung</span>
       </div>
-      <button class="ps-arw right" aria-label="Weiter" onclick="psNext()">›</button>
-      <div class="dotbar" id="psDots"></div>
-      <p style="opacity:.7; font-size:.9rem; margin:.5rem 0 0; text-align:left">
-        Tipp: Bild anklicken – Lightbox öffnet sich groß auf der Seite.
-      </p>
-    </div>
-  </div>
-</section>
 
-<!-- ================== FEATURE BANNER 2 ================== -->
-<section class="feature feature--2" title="Trainieren wie die Profis – Impression"></section>
+      <h1 class="hero__title">DEISTER KICKER FUSSBALLSCHULE</h1>
 
-<!-- ================== STANDORT / SOCIAL / SPONSORS ================== -->
-<section>
-  <div class="wrap grid">
-    <div class="panel">
-      <h2>TRAININGSZEIT &amp; STANDORT</h2>
-      <h3>TSV HAMELSPRINGE • SPORTPLATZ</h3>
-      <p><strong>Montag:</strong> 16:45 – 18:15 Uhr (Beginn 16:45)</p>
-      <p><strong>Adresse:</strong> Kösterbrink 2, 31848 Bad Münder am Deister</p>
-      <p style="margin-top:14px">
-        <strong>Fragen?</strong> Wir freuen uns über jede Anfrage. Hier beginnt die Förderung deines Kindes –
-        melde dich einfach per WhatsApp oder E-Mail.
+      <p class="hero__subtitle">
+        Moderne, spielnahe Einheiten für motivierte Spielerinnen &amp; Spieler ab 5 Jahren. Fokus:
+        <strong>Spaß am Ball</strong> • <strong>klare Methodik</strong> • <strong>individuelle Entwicklung</strong>.
       </p>
-      <div class="btns" style="margin-top:10px">
+
+      <div class="btns">
         <a class="btn btn--brand"
-           href="https://wa.me/4917661779069?text=Hallo%20Deister%20Kicker!%20Ich%20habe%20eine%20Frage%20zum%20Training."
-           target="_blank" rel="noopener">WhatsApp schreiben</a>
-        <a class="btn btn--brand" href="mailto:info@deisterkicker.de">Mail senden</a>
+           href="https://wa.me/4917661779069?text=Hallo%20Deister%20Kicker!%20Ich%20h%C3%A4tte%20Interesse%20an%20einem%20Probetraining."
+           target="_blank" rel="noopener">WhatsApp – Probetraining anfragen</a>
+        <a class="btn btn--brand" href="mailto:info@deisterkicker.de">E-Mail senden</a>
       </div>
     </div>
+  </header>
 
-    <div class="panel">
-      <iframe class="map"
-        src="https://www.google.com/maps?q=K%C3%B6sterbrink%202%2C%2031848%20Bad%20M%C3%BCnder%20am%20Deister&output=embed"
-        loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Karte Kösterbrink 2"></iframe>
-    </div>
+  <main>
 
-    <div class="panel" style="grid-column:1/-1">
-      <div class="ig">
-        <div style="display:flex; align-items:center; gap:12px">
-          <div class="ig__badge">IG</div>
-          <div>
-            <div style="opacity:.9">Folge uns auf Instagram</div>
-            <strong>@deister_kicker</strong>
+    <!-- WARUM WIR -->
+    <section class="wrap why">
+      <h2>WARUM WIR?</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#F87903" stroke-width="2"/></svg>
+            Individuelle Entwicklung
+          </h3>
+          <p>Gezielte Förderung je nach Leistungsstand. Persönliche Ziele, klare Fortschritte, echtes Feedback.</p>
+        </article>
+        <article class="card">
+          <h3>
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M12 4v16" stroke="#F87903" stroke-width="2"/></svg>
+            Spielnah &amp; modern
+          </h3>
+          <p>Methodik auf neuestem Stand: viel Ballkontakt, Spielformen, smarte Technik-Drills.</p>
+        </article>
+        <article class="card">
+          <h3>
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z" stroke="#F87903" stroke-width="2"/></svg>
+            Familiäre Trainer-Atmosphäre
+          </h3>
+          <p>Leidenschaftlich, nahbar, respektvoll. Vertrauen &amp; Spaß sind die Grundlage für Leistung.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- FULL-WIDTH Bild 1 -->
+    <section class="feature spacer-top">
+      <figure class="fullbleed">
+        <img src="Future-1.jpg" alt="Gemeinsam erfolgreich – Impression" loading="lazy">
+      </figure>
+    </section>
+
+    <!-- HANDY-SLIDER (Variante B) -->
+    <section class="gallery">
+      <div class="wrap">
+        <h2>EINDRÜCKE AUS DEM TRAINING</h2>
+
+        <div class="phone-stage" id="stage">
+          <div class="navArrow navArrow--left"  aria-label="Zurück" onclick="prevSlide()">‹</div>
+          <div class="navArrow navArrow--right" aria-label="Weiter" onclick="nextSlide()">›</div>
+
+          <div class="phone" id="phone">
+            <!-- Bilder werden per JS geladen; Dateinamen anpassen/ergänzen wie gewünscht -->
+            <img data-src="gallery-1.jpg" alt="Training 1" onerror="this.remove()">
+            <img data-src="gallery-2.jpg" alt="Training 2" onerror="this.remove()">
+            <img data-src="gallery-3.jpg" alt="Training 3" onerror="this.remove()">
+            <img data-src="gallery-4.jpg" alt="Training 4" onerror="this.remove()">
+            <img data-src="gallery-5.jpg" alt="Training 5" onerror="this.remove()">
+          </div>
+
+          <div class="dotbar" id="dotbar" aria-hidden="true"></div>
+        </div>
+
+        <p style="opacity:.7; font-size:.9rem; margin:.75rem 0 0;">
+          Tipp: Bild anklicken – Lightbox öffnet sich groß auf der Seite.
+        </p>
+      </div>
+    </section>
+
+    <!-- FULL-WIDTH Bild 2 -->
+    <section class="feature spacer-bottom">
+      <figure class="fullbleed">
+        <img src="Future-2.jpg" alt="Trainieren wie die Profis – Impression" loading="lazy">
+      </figure>
+    </section>
+
+    <!-- STANDORT / KONTAKT -->
+    <section>
+      <div class="wrap grid">
+        <div class="panel">
+          <h2>TRAININGSZEIT &amp; STANDORT</h2>
+          <h3>TSV HAMELSPRINGE • SPORTPLATZ</h3>
+          <p><strong>Montag:</strong> 16:45 – 18:15 Uhr (Beginn 16:45)</p>
+          <p><strong>Adresse:</strong> Kösterbrink 2, 31848 Bad Münder am Deister</p>
+          <p style="margin-top:14px">
+            <strong>Fragen?</strong> Wir freuen uns über jede Anfrage. Hier beginnt die Förderung deines Kindes –
+            melde dich einfach per WhatsApp oder E-Mail.
+          </p>
+          <div class="btns" style="margin-top:10px">
+            <a class="btn btn--brand"
+               href="https://wa.me/4917661779069?text=Hallo%20Deister%20Kicker!%20Ich%20habe%20eine%20Frage%20zum%20Training."
+               target="_blank" rel="noopener">WhatsApp schreiben</a>
+            <a class="btn btn--brand" href="mailto:info@deisterkicker.de">Mail senden</a>
           </div>
         </div>
-        <a class="btn btn--light" href="https://www.instagram.com/deister_kicker" target="_blank" rel="noopener">Instagram ansehen</a>
+
+        <div class="panel">
+          <iframe class="map"
+            src="https://www.google.com/maps?q=K%C3%B6sterbrink%202%2C%2031848%20Bad%20M%C3%BCnder%20am%20Deister&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Karte Kösterbrink 2"></iframe>
+        </div>
+
+        <div class="panel" style="grid-column:1/-1">
+          <div class="ig">
+            <div class="ig__left">
+              <div class="ig__badge">IG</div>
+              <div>
+                <div style="opacity:.9">Folge uns auf Instagram</div>
+                <strong>@deister_kicker</strong>
+              </div>
+            </div>
+            <!-- Button jetzt orange mit blauer Schrift -->
+            <a class="btn btn--brand" href="https://www.instagram.com/deister_kicker" target="_blank" rel="noopener">Instagram ansehen</a>
+          </div>
+        </div>
+
+        <div class="panel sponsors-wrap" style="grid-column:1/-1">
+          <h3 class="sponsors-title">UNTERSTÜTZER UNSERER FUSSBALLSCHULE</h3>
+          <div class="sponsors">
+            <img src="sponsor-1.png" alt="Sponsor 1" onerror="this.style.display='none'">
+            <img src="sponsor-2.png" alt="Sponsor 2" onerror="this.style.display='none'">
+            <img src="sponsor-3.png" alt="Sponsor 3" onerror="this.style.display='none'">
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+  </main>
 
-    <div class="panel" style="grid-column:1/-1">
-      <h3 style="margin:0 0 14px; text-align:center">UNTERSTÜTZER UNSERER FUSSBALLSCHULE</h3>
-      <div class="sponsors">
-        <img src="sponsor-1.png" alt="Sponsor 1" onerror="this.hidden=true">
-        <img src="sponsor-2.png" alt="Sponsor 2" onerror="this.hidden=true">
-        <img src="sponsor-3.png" alt="Sponsor 3" onerror="this.hidden=true">
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="footlinks">
+        <a href="#" onclick="openModal('impressum');return false;">Impressum</a>
+        <a href="#" onclick="openModal('datenschutz');return false;">Datenschutz</a>
       </div>
-      <p style="text-align:center; opacity:.65; font-size:.85rem; margin-top:12px">
-        Tipp: Falls ein Logo fehlt, prüfe Dateiname & Groß/Kleinschreibung exakt (<code>sponsor-3.png</code>) und PNG-Transparenz.
-      </p>
+      <div style="text-align:center; opacity:.85">© Deister Kicker Fussballschule · 2025</div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- ================== FOOTER ================== -->
-<footer>
-  <div class="wrap">
-    <div class="footlinks">
-      <a href="#" onclick="openModal('impressum');return false;">Impressum</a>
-      <a href="#" onclick="openModal('datenschutz');return false;">Datenschutz</a>
+  <!-- Back to top -->
+  <button class="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="nach oben">↑</button>
+
+  <!-- MODALS -->
+  <section class="modal" id="impressum">
+    <div class="modal__card">
+      <span class="modal__close" onclick="closeModal('impressum')">✕</span>
+      <h3>Impressum</h3>
+      <p><strong>Deister Kicker Fussballschule</strong><br>(ein Projekt der Agentur Players Factory)</p>
+      <p><strong>Geschäftsführender Inhaber:</strong> Toni Kierakowitz</p>
+      <p>Hamelspringer Straße 36<br>31848 Bad Münder am Deister</p>
+      <p>E-Mail: <a href="mailto:info@deisterkicker.de">info@deisterkicker.de</a></p>
     </div>
-    <div style="text-align:center; opacity:.85">© Deister Kicker Fussballschule · 2025</div>
-  </div>
-</footer>
+  </section>
 
-<!-- Back to top -->
-<button class="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="nach oben">↑</button>
-
-<!-- Lightbox -->
-<div class="lb" id="lb" onclick="this.classList.remove('show')">
-  <img id="lbImg" alt="">
-</div>
-
-<!-- ================== MODALS ================== -->
-<section class="modal" id="impressum">
-  <div class="modal__card">
-    <span class="modal__close" onclick="closeModal('impressum')">✕</span>
-    <h3>Impressum</h3>
-    <p><strong>Deister Kicker Fussballschule</strong><br>(ein Projekt der Agentur Players Factory)</p>
-    <p><strong>Geschäftsführender Inhaber:</strong> Toni Kierakowitz</p>
-    <p>Hamelspringer Straße 36<br>31848 Bad Münder am Deister</p>
-    <p>E-Mail: <a href="mailto:info@deisterkicker.de">info@deisterkicker.de</a></p>
-  </div>
-</section>
-
-<section class="modal" id="datenschutz">
-  <div class="modal__card">
-    <span class="modal__close" onclick="closeModal('datenschutz')">✕</span>
-    <h3>Datenschutz</h3>
-    <p>Wir verarbeiten personenbezogene Daten (z. B. bei Kontaktaufnahme via WhatsApp/E-Mail) ausschließlich zur
-      Bearbeitung von Anfragen. Mehr Informationen auf Anfrage.</p>
-  </div>
-</section>
+  <section class="modal" id="datenschutz">
+    <div class="modal__card">
+      <span class="modal__close" onclick="closeModal('datenschutz')">✕</span>
+      <h3>Datenschutz</h3>
+      <p>Wir verarbeiten personenbezogene Daten (z. B. bei Kontaktaufnahme via WhatsApp/E-Mail) ausschließlich zur
+        Bearbeitung von Anfragen. Mehr Informationen auf Anfrage.</p>
+    </div>
+  </section>
 
 <script>
-/* --------- Handy-Slider (Variante B) --------- */
-const psImages = [
-  "gallery-1.jpg","gallery-2.jpg","gallery-3.jpg",
-  "gallery-4.jpg","gallery-5.jpg","gallery-6.jpg"
-];
-const psImg  = document.getElementById('psImg');
-const psDots = document.getElementById('psDots');
-let psList   = [];
-psImages.forEach(src=>{
-  const img = new Image();
-  img.onload = ()=>{ psList.push(src); if(psList.length===1) psShow(0); psRenderDots(); };
-  img.onerror = ()=>{}; // ignorieren, wenn es Bild nicht gibt
-  img.src = src;
-});
-
-let psIndex = 0;
-function psShow(i){
-  if(!psList.length) return;
-  psIndex = (i+psList.length)%psList.length;
-  psImg.src = psList[psIndex];
-  Array.from(psDots.children).forEach((d,k)=>d.classList.toggle('active',k===psIndex));
-}
-function psNext(){ psShow(psIndex+1) }
-function psPrev(){ psShow(psIndex-1) }
-function psRenderDots(){
-  psDots.innerHTML = psList.map((_,k)=>`<span class="dot ${k===psIndex?'active':''}" onclick="psShow(${k})"></span>`).join('');
-}
-psImg.addEventListener('click', ()=>{
-  const lb = document.getElementById('lb');
-  const lbImg = document.getElementById('lbImg');
-  lbImg.src = psImg.src;
-  lb.classList.add('show');
-});
-
-/* --------- Modals --------- */
-function openModal(id){ document.getElementById(id).classList.add('show') }
-function closeModal(id){ document.getElementById(id).classList.remove('show') }
-window.addEventListener('keydown', e=>{
-  if(e.key==='Escape'){
-    document.querySelectorAll('.modal.show').forEach(m=>m.classList.remove('show'));
-    document.getElementById('lb').classList.remove('show');
+  /* -------- Phone-Slider -------- */
+  const phone = document.getElementById('phone');
+  const imgs = Array.from(phone.querySelectorAll('img'));
+  imgs.forEach(i=>{ const s=i.getAttribute('data-src'); if(s) i.src=s; });
+  let pIndex = 0;
+  function show(k){
+    if(!imgs.length) return;
+    pIndex = (k+imgs.length)%imgs.length;
+    imgs.forEach((im,ix)=> im.style.display = (ix===pIndex)?'block':'none');
+    const bar = document.getElementById('dotbar');
+    bar.innerHTML = imgs.map((_,ix)=>`<span class="dot ${ix===pIndex?'active':''}"></span>`).join('');
   }
-});
+  function nextSlide(){ show(pIndex+1) }
+  function prevSlide(){ show(pIndex-1) }
+  show(0);
+
+  // Lightbox in Seite
+  phone.addEventListener('click', ()=>{
+    const src = imgs[pIndex]?.src; if(!src) return;
+    const modal = document.createElement('div');
+    modal.className = 'modal show';
+    modal.onclick = ()=> document.body.removeChild(modal);
+    modal.innerHTML = `
+      <div class="modal__card" style="max-width:1200px;background:#02040f;padding:0;border:0;">
+        <img src="${src}" alt="" style="width:100%;height:auto;display:block;border-radius:8px"/>
+      </div>`;
+    document.body.appendChild(modal);
+  });
+
+  /* -------- Modals Footer -------- */
+  function openModal(id){ document.getElementById(id).classList.add('show') }
+  function closeModal(id){ document.getElementById(id).classList.remove('show') }
+  window.addEventListener('keydown', e=>{
+    if(e.key==='Escape'){ document.querySelectorAll('.modal.show').forEach(m=>m.classList.remove('show')) }
+  });
 </script>
 </body>
 </html>
